@@ -1,0 +1,2 @@
+D:\Users\tri\Documents\GitHub\raspberryJs\raspberryJs\obj\Debug\raspberryJs.njsprojResolveAssemblyReference.cache
+D:\Users\tri\Documents\GitHub\raspberryJs\raspberryJs\bin\Microsoft.NodejsTools.WebRole.dll
