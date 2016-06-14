@@ -1,0 +1,18 @@
+{
+  "name": "raspberryJs",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery.cookie": "jquery-cookie#^1.4.1"
+  }
+}

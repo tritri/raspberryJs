@@ -1,0 +1,33 @@
+[ERR!] cwd  : C:\Users\t_sakai.ZPDI\Documents\GitHub\raspberryJs\raspberryJs
+[ERR!] os   : Windows_NT 6.3.9600
+[ERR!] argv : "node" "C:\\Users\\t_sakai.ZPDI\\AppData\\Roaming\\npm\\node_modules\\tsd\\build\\cli.js" "query" "angular" "-v" "all"
+[ERR!] node : v0.12.2
+[ERR!] tsd  : 0.6.5
+[ERR!] Error: Unexpected token ﻿
+[ERR!] CODE : undefined
+[ERR!] Unexpected token ﻿
+[ERR!] If you need help, you may report this error at:
+    https://github.com/DefinitelyTyped/tsd/issues
+
+[ERR!] 
+SyntaxError: Unexpected token ﻿
+    at Object.parse (native)
+    at parseJson (C:\Users\t_sakai.ZPDI\AppData\Roaming\npm\node_modules\tsd\build\xm\fileIO.js:30:21)
+    at Object.readJSONSync (C:\Users\t_sakai.ZPDI\AppData\Roaming\npm\node_modules\tsd\build\xm\fileIO.js:41:12)
+    at new Context (C:\Users\t_sakai.ZPDI\AppData\Roaming\npm\node_modules\tsd\build\tsd\context\Context.js:18:48)
+    at getContext (C:\Users\t_sakai.ZPDI\AppData\Roaming\npm\node_modules\tsd\build\tsd\CLI.js:65:23)
+    at C:\Users\t_sakai.ZPDI\AppData\Roaming\npm\node_modules\tsd\build\tsd\CLI.js:85:20
+    at tryCatch1 (C:\Users\t_sakai.ZPDI\AppData\Roaming\npm\node_modules\tsd\node_modules\bluebird\js\main\util.js:63:19)
+    at Promise$_callHandler [as _callHandler] (C:\Users\t_sakai.ZPDI\AppData\Roaming\npm\node_modules\tsd\node_modules\bluebird\js\main\promise.js:695:13)
+    at Promise$_settlePromiseFromHandler [as _settlePromiseFromHandler] (C:\Users\t_sakai.ZPDI\AppData\Roaming\npm\node_modules\tsd\node_modules\bluebird\js\main\promise.js:711:18)
+    at Promise$_settlePromiseAt [as _settlePromiseAt] (C:\Users\t_sakai.ZPDI\AppData\Roaming\npm\node_modules\tsd\node_modules\bluebird\js\main\promise.js:868:14)
+
+[ERR!] tsd.json: {"version":"v4","repo":"borisyankov/DefinitelyTyped","ref":"master","path":"Scripts/typings","bundle":"Scripts/typings/tsd.d.ts","installed":{"serve-static/serve-static.d.ts":{"commit":"473232e5dbd179e9ee682fab12f796720f37b118"},"express/express.d.ts":{"commit":"473232e5dbd179e9ee682fab12f796720f37b118"},"mime/mime.d.ts":{"commit":"473232e5dbd179e9ee682fab12f796720f37b118"},"express-serve-static-core/express-serve-static-core.d.ts":{"commit":"473232e5dbd179e9ee682fab12f796720f37b118"},"node/node.d.ts":{"commit":"473232e5dbd179e9ee682fab12f796720f37b118"}}}
+
+[ERR!] .tsdrc : ﻿{
+  "proxy": "http://zpr1:8080"
+}
+
+[ERR!] Please include the following file with any support request:
+    C:\Users\t_sakai.ZPDI\Documents\GitHub\raspberryJs\raspberryJs\tsd-debug.log
+
