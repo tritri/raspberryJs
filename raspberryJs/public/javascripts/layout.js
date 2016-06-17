@@ -1,4 +1,5 @@
 ﻿
+//onloadイベントハンドラ
 /* onloadイベント発生した時に行う処理を記述 */
 function init() {
     alert("ページが読み込まれました");
@@ -18,16 +19,19 @@ $(function () {
 });
 
 var ajax = null;
+//ボタンクリックイベントハンドラ
+//html側では引数としてarguments[0]を与えて下しあ
+function doActionButton(event) {
+    var id = event.srcElement.id;//senderとしたeventから送信者のidを取得します
+    var input = document.getElementById(id);//ここの文字列はlayout.jade中の文字を得たい要素のidを指定する
 
-function doAction() {
-    var input = document.getElementById("upcenter");
     var callback = function () {
-        var target = document.getElementById("msg");
+        var target = document.getElementById("buttontxt");//ここの文字列はlayout.jade中の文字を返したい要素のidを指定する
         var res = JSON.parse(ajax.getResponse());
-        target.textContent = "you send::" + res.msg;
+        target.textContent = "you send::" + res.messagetxt;//ここから指定したlayout.jadeの要素にテキストとして書き込む
     }
-    ajax = new AjaxObject('/layout?centerButton=' + 
-                    input.value, callback);
+    ajax = new AjaxObject('/layout?buttonName=' + 
+                    input.value, callback);//ここからindex.tsへpostされる(layoutが名前となりコントローラーにバインドされる関数がどこから来たのか区別するために使われます、?以降がクエリ文字列としてコントローラーに引き渡されます)
 }
 
 function AjaxObject(url, callback) {

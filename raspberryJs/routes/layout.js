@@ -12,5 +12,13 @@ router.post('index', function (req, res, next) {
         input: str
     });
 });
+router.post('/', function (req, res, next) {
+    var str = req.body['input1'];
+    res.render('helo', {
+        title: 'HELO Page',
+        msg: "you typed: " + str,
+        input: str
+    });
+});
 module.exports = router;
 //# sourceMappingURL=layout.js.map

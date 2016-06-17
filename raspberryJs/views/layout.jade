@@ -29,6 +29,7 @@ html(lang='ja')
         script(src='bower_components/jquery.cookie/jquery.cookie.js')
         //ajaxで作ったjsファイルの読みこみ
         script(src='javascripts/layout.js', type="text/javascript", language="JavaScript")
+        script(src='./motorDrive.js')
 
     body(onload="init()").container
         nav.navbar.navbar-default
@@ -79,12 +80,14 @@ html(lang='ja')
         - var toggle=active
         //ナビゲーションタブの選択により表示されるデータ
         div.tab-content( style="margin-top: 10px")
-            div#drive.tab-pane
+            div#drive.tab-pane.active
                 div.form-group
-                    form(method="post", action="/")
-                        button.btn.btn-primary(type="submit",name="testButton",value="primary", href="#") Primary
+                    form(id="form1" method="post", action="/" onsubmit="return false;")
+                        input(type="text" id="input1" name="input1" value=messagetxt)
+                        button.btn.btn-primary( type="button" id="btn" value="ajaxtest" onclick="doAction();") Ajaxテストぉ
+                        //button.btn.btn-primary(type="submit",name="testButton",value="primary", href="#") Primary
                 p 何かが返ってきた
-                //p=messagetxt
+                p(id="messagetxt")
                 p.
                     ホームの文章です。<br>Raw denim you probably haven't heard of them jean
                     shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master
@@ -93,28 +96,34 @@ html(lang='ja')
                     sweater eu banh mi, qui irure terry richardson ex squid. Aliquip
                     placeat salvia cillum iphone. Seitan aliquip quis cardigan american
                     apparel, butcher voluptate nisi qui.
-            div#basic.tab-pane.active
+            div#basic.tab-pane
                 p 操縦用の10文字ボタン配置
                     div.container
                         div.row
-                            div.col-sm-4 上左
-                            div.col-sm-4                                
-                                form(id="form1",name="form1",method="post", action="/",onsubmit="return false;")
-                                    button.btn.btn-primary( type="submit",id="upcenter",name="centerButton",value="upcenter",onclick="doAction();") 上
-                            div.col-sm-4 上右
-                        div.row
-                            div.col-sm-4 中左
                             div.col-sm-4
-                                form(method="post", action="/")
-                                    button.btn.btn-primary( type="submit",name="centerButton",value="center",onclick="doAction();") Primary
-                            div.col-sm-4 中右
+                                button.btn.btn-primary( type="button",class="buttonsDrive",id="driveULbtn",value="TopLeft",onclick="doActionButton(arguments[0]);") 上左
+                            div.col-sm-4
+                                button.btn.btn-primary( type="button",class="buttonsDrive",id="driveUCbtn",value="TopCenter",onclick="doActionButton(arguments[0]);") 上中
+                            div.col-sm-4
+                                button.btn.btn-primary( type="button",class="buttonsDrive",id="driveURbtn",value="TopRight",onclick="doActionButton(arguments[0]);") 上右
+                        div.row
+                            div.col-sm-4
+                                button.btn.btn-primary( type="button",class="buttonsDrive", id="driveCLbtn",value="CenterLeft" ,onclick="doActionButton(arguments[0]);") 中左
+                            div.col-sm-4
+                                button.btn.btn-primary( type="button",class="buttonsDrive", id="driveCbtn",value="Center" ,onclick="doActionButton(arguments[0]);") 中＿
+                            div.col-sm-4
+                                button.btn.btn-primary( type="button",class="buttonsDrive", id="driveCRbtn",value="CenterRight" ,onclick="doActionButton(arguments[0]);") 中右
 
                         div.row
-                            div.col-sm-4 下左
-                            div.col-sm-4 下中
-                            div.col-sm-4 下右
+                            div.col-sm-4
+                                button.btn.btn-primary( type="button",class="buttonsDrive", id="driveDLtn",value="DownLeft" ,onclick="doActionButton(arguments[0]);") 下左
+                            div.col-sm-4
+                                button.btn.btn-primary( type="button",class="buttonsDrive", id="driveDCtn",value="DownCenter" ,onclick="doActionButton(arguments[0]);") 下中
+                            div.col-sm-4
+                                button.btn.btn-primary( type="button",class="buttonsDrive", id="driveDRtn",value="DownRight" ,onclick="doActionButton(arguments[0]);") 下右
                         div.row
-                            h1=messagetxt
+                            p ここにどのボタンが押されたか表示
+                            p(id="buttontxt")
             div#setting.tab-pane
                 p.
                     設定ページ予定。<br>Etsy mixtape wayfarers, ethical wes anderson

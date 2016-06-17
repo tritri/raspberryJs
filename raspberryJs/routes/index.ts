@@ -1,4 +1,5 @@
-﻿import express = require('express');
+﻿
+import express = require('express');
 var router = express.Router();
 
 /* GET home page. */
@@ -12,6 +13,7 @@ router.get('/', function (req: express.Request, res: express.Response, next: Fun
 //formの属性、action="/"としないとここには飛んでこない
 router.post('/', function (req, res, next) {
     var str = req.body['input1'];
+
     
     //レスポンスはなぜか直接レスポンス先のjadeファイルを指定しないとだめ？
     res.render('layout',
@@ -21,4 +23,20 @@ router.post('/', function (req, res, next) {
         }
     );
 });
+//こちらはlayout.jsよりpostされた場合、
+//AjaxObjectのコンストラクタへの引数にlayoutが指定されている
+router.post('/layout', function (req, res, next) {
+    var str = req.query['buttonName'];
+    
+    /// <reference path="./motorDrive.ts"/>
+    var motor= new motorDrive();
+    motor.drive(2.0, 0, "pos");
+
+    res.json(
+        {
+            messagetxt: str,
+        }
+    );
+});
+
 module.exports = router;
