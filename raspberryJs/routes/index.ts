@@ -1,23 +1,28 @@
 ﻿
-var DRV8830_0 = 0x60;
-var DRV8830_1 = 0x62;
-var CONTROL_REG = 0x00;
-var FAULT_REG = 0x01;
-var STANBY = 0x00;
-var NEG_ROT = 0x02;
-var POS_ROT = 0x01;
-var BREAK = 0x03;
-var express = require('express');
-var router = express.Router();
-var i2c = require('i2c');
-var addr = DRV8830_0;
-var wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
-var wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
-var motorDrive = (function () {
+class motorDrive{
+
+    static DRV8830_0 = 0x60;
+    static DRV8830_1 = 0x62;
+    static CONTROL_REG = 0x00;
+    static FAULT_REG = 0x01;
+    static STANBY = 0x00;
+    static NEG_ROT = 0x02;
+    static POS_ROT = 0x01;
+    static BREAK = 0x03;
+    static router = express.Router();
+    static i2c = require('i2c');
+    static addr = DRV8830_0;
+    static wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
+    static wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
+
+
+
+
     /**
      * コンストラクタ
      */
-    function motorDrive() {
+    constructor(){ 
+
     }
     /**
      *  GET users listing.
@@ -25,7 +30,8 @@ var motorDrive = (function () {
      *http://192.168.1.98:3000/users?num=0&drive=break&volt=1.0
      * @param queryDatas
      */
-    motorDrive.prototype.drive = function (voltage, motorNum, driveDir) {
+    public function drive(voltage, motorNum, driveDir): boolean
+{
         var vSetF = voltage; //voltクエリにて電圧を取得
         var vSet = ((vSetF * 100)) / 8;
         var drive = STANBY;
@@ -54,12 +60,10 @@ var motorDrive = (function () {
         }
         //wire.writeBytes(0x16, [0x05], function(err, res){});
         return true;
-    };
-    return motorDrive;
-}());
+}
 
 
-import express = require('express');
+//import express = require('express');
 var router = express.Router();
 
 /* GET home page. */
