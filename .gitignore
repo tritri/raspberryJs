@@ -41,6 +41,7 @@ jspm_packages
 obj/
 *.data
 .tsdrc
+.suo
 
 /raspberryJs/.ntvs_analysis.dat.tmp
 /raspberryJs/.ntvs_analysis.dat
