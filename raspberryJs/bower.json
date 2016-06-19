@@ -12,6 +12,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "jquery.cookie": "jquery-cookie#^1.4.1"
   }
 }

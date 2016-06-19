@@ -35,3 +35,12 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+#VisualstudioProject(By TriTri)
+.vs/
+obj/
+*.data
+.tsdrc
+
+/raspberryJs/.ntvs_analysis.dat.tmp
+/raspberryJs/.ntvs_analysis.dat
