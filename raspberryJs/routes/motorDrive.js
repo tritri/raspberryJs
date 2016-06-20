@@ -55,5 +55,5 @@ var motorDrive = (function () {
         return true;
     };
     return motorDrive;
-}());
+})();
 //# sourceMappingURL=motorDrive.js.map
