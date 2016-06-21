@@ -47,9 +47,11 @@
     <Content Include="README.md" />
     <TypeScriptCompile Include="routes\layout.ts" />
     <TypeScriptCompile Include="routes\index.ts" />
+    <TypeScriptCompile Include="routes\motorDrive.ts" />
     <TypeScriptCompile Include="routes\users.ts" />
     <TypeScriptCompile Include="Scripts\typings\express-serve-static-core\express-serve-static-core.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\express\express.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\i2c\i2c.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\mime\mime.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\node\node.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\serve-static\serve-static.d.ts" />
@@ -67,6 +69,7 @@
     <Folder Include="Scripts\typings\express-serve-static-core\" />
     <Folder Include="Scripts\typings\express\" />
     <Folder Include="Scripts\typings\mime\" />
+    <Folder Include="Scripts\typings\i2c\" />
     <Folder Include="Scripts\typings\node\" />
     <Folder Include="Scripts\typings\serve-static\" />
     <Folder Include="views\" />
