@@ -6,12 +6,10 @@ var STANBY = 0x00;
 var NEG_ROT = 0x02;
 var POS_ROT = 0x01;
 var BREAK = 0x03;
-var express = require('express');
-var router = express.Router();
-var i2c = require('i2c');
+//var i2c = require('i2c');
 var addr = DRV8830_0;
-var wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
-var wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
+//var wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
+//var wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
 var motorDrive = (function () {
     /**
      * コンストラクタ
@@ -46,14 +44,15 @@ var motorDrive = (function () {
         var motorNo = motorNum;
         //var wire;
         if (motorNo == 0) {
-            wire0.writeBytes(controlData, [byteData], function (err, res) { });
+            console.log("motor0 Start!\n");
         }
         else {
-            wire1.writeBytes(controlData, [byteData], function (err, res) { });
+            console.log("motor1 Start!\n");
         }
         //wire.writeBytes(0x16, [0x05], function(err, res){});
         return true;
     };
     return motorDrive;
 })();
+exports.motorDrive = motorDrive;
 //# sourceMappingURL=motorDrive.js.map
