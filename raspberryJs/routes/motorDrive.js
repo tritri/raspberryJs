@@ -8,13 +8,15 @@ var POS_ROT = 0x01;
 var BREAK = 0x03;
 //var i2c = require('i2c');
 var addr = DRV8830_0;
-//var wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
-//var wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
+var wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
+var wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
 var motorDrive = (function () {
     /**
      * コンストラクタ
      */
     function motorDrive() {
+        wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
+        wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
     }
     /**
      *  GET users listing.
@@ -45,9 +47,11 @@ var motorDrive = (function () {
         //var wire;
         if (motorNo == 0) {
             console.log("motor0 Start!\n");
+            wire0.writeBytes(controlData, [byteData], function (err, res) { });
         }
         else {
             console.log("motor1 Start!\n");
+            wire1.writeBytes(controlData, [byteData], function (err, res) { });
         }
         //wire.writeBytes(0x16, [0x05], function(err, res){});
         return true;

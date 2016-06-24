@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var i2c = require('i2c');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');

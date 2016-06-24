@@ -21,7 +21,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <EnableTypeScript>true</EnableTypeScript>
@@ -37,6 +37,48 @@
     <Content Include=".bowerrc" />
     <Content Include=".tsdrc" />
     <Content Include="bower.json" />
+    <Content Include="node_modules\i2c\.npmignore" />
+    <Content Include="node_modules\i2c\binding.gyp" />
+    <Content Include="node_modules\i2c\build\binding.Makefile" />
+    <Content Include="node_modules\i2c\build\config.gypi" />
+    <Content Include="node_modules\i2c\build\i2c.target.mk" />
+    <Content Include="node_modules\i2c\build\Makefile" />
+    <Content Include="node_modules\i2c\build\Release\.deps\Release\i2c.node.d" />
+    <Content Include="node_modules\i2c\build\Release\.deps\Release\obj.target\i2c.node.d" />
+    <Content Include="node_modules\i2c\build\Release\.deps\Release\obj.target\i2c\src\i2c.o.d" />
+    <Content Include="node_modules\i2c\build\Release\i2c.node" />
+    <Content Include="node_modules\i2c\build\Release\obj.target\i2c.node" />
+    <Content Include="node_modules\i2c\build\Release\obj.target\i2c\src\i2c.o" />
+    <Content Include="node_modules\i2c\examples\accelerometer\accel.coffee" />
+    <Content Include="node_modules\i2c\examples\blinkm\blinkm.coffee" />
+    <Content Include="node_modules\i2c\lib\i2c.coffee" />
+    <Content Include="node_modules\i2c\LICENSE" />
+    <Content Include="node_modules\i2c\node_modules\.bin\cake" />
+    <Content Include="node_modules\i2c\node_modules\.bin\coffee" />
+    <Content Include="node_modules\i2c\node_modules\bindings\package.json" />
+    <Content Include="node_modules\i2c\node_modules\bindings\README.md" />
+    <Content Include="node_modules\i2c\node_modules\coffee-script\.npmignore" />
+    <Content Include="node_modules\i2c\node_modules\coffee-script\bin\cake" />
+    <Content Include="node_modules\i2c\node_modules\coffee-script\bin\coffee" />
+    <Content Include="node_modules\i2c\node_modules\coffee-script\CNAME" />
+    <Content Include="node_modules\i2c\node_modules\coffee-script\extras\jsl.conf" />
+    <Content Include="node_modules\i2c\node_modules\coffee-script\LICENSE" />
+    <Content Include="node_modules\i2c\node_modules\coffee-script\package.json" />
+    <Content Include="node_modules\i2c\node_modules\coffee-script\Rakefile" />
+    <Content Include="node_modules\i2c\node_modules\coffee-script\README" />
+    <Content Include="node_modules\i2c\node_modules\repl\package.json" />
+    <Content Include="node_modules\i2c\node_modules\repl\README.md" />
+    <Content Include="node_modules\i2c\node_modules\underscore\.npmignore" />
+    <Content Include="node_modules\i2c\node_modules\underscore\index.html" />
+    <Content Include="node_modules\i2c\node_modules\underscore\LICENSE" />
+    <Content Include="node_modules\i2c\node_modules\underscore\package.json" />
+    <Content Include="node_modules\i2c\node_modules\underscore\raw\underscore.psd" />
+    <Content Include="node_modules\i2c\node_modules\underscore\README" />
+    <Content Include="node_modules\i2c\package.json" />
+    <Content Include="node_modules\i2c\README.md" />
+    <Content Include="node_modules\i2c\src\i2c-dev.c" />
+    <Content Include="node_modules\i2c\src\i2c-dev.h" />
+    <Content Include="node_modules\i2c\src\i2c.cc" />
     <Content Include="views\error.jade" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
@@ -59,6 +101,34 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="node_modules\i2c\" />
+    <Folder Include="node_modules\i2c\build\" />
+    <Folder Include="node_modules\i2c\build\Release\" />
+    <Folder Include="node_modules\i2c\build\Release\.deps\" />
+    <Folder Include="node_modules\i2c\build\Release\.deps\Release\" />
+    <Folder Include="node_modules\i2c\build\Release\.deps\Release\obj.target\" />
+    <Folder Include="node_modules\i2c\build\Release\.deps\Release\obj.target\i2c\" />
+    <Folder Include="node_modules\i2c\build\Release\.deps\Release\obj.target\i2c\src\" />
+    <Folder Include="node_modules\i2c\build\Release\obj.target\" />
+    <Folder Include="node_modules\i2c\build\Release\obj.target\i2c\" />
+    <Folder Include="node_modules\i2c\build\Release\obj.target\i2c\src\" />
+    <Folder Include="node_modules\i2c\examples\" />
+    <Folder Include="node_modules\i2c\examples\accelerometer\" />
+    <Folder Include="node_modules\i2c\examples\blinkm\" />
+    <Folder Include="node_modules\i2c\lib\" />
+    <Folder Include="node_modules\i2c\node_modules\" />
+    <Folder Include="node_modules\i2c\node_modules\.bin\" />
+    <Folder Include="node_modules\i2c\node_modules\bindings\" />
+    <Folder Include="node_modules\i2c\node_modules\coffee-script\" />
+    <Folder Include="node_modules\i2c\node_modules\coffee-script\bin\" />
+    <Folder Include="node_modules\i2c\node_modules\coffee-script\extras\" />
+    <Folder Include="node_modules\i2c\node_modules\coffee-script\lib\" />
+    <Folder Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\" />
+    <Folder Include="node_modules\i2c\node_modules\repl\" />
+    <Folder Include="node_modules\i2c\node_modules\repl\lib\" />
+    <Folder Include="node_modules\i2c\node_modules\underscore\" />
+    <Folder Include="node_modules\i2c\node_modules\underscore\raw\" />
+    <Folder Include="node_modules\i2c\src\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
@@ -75,6 +145,28 @@
     <Folder Include="views\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="node_modules\i2c\main.js" />
+    <Compile Include="node_modules\i2c\node_modules\bindings\bindings.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\browser.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\cake.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\coffee-script.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\command.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\grammar.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\helpers.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\index.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\lexer.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\nodes.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\optparse.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\parser.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\repl.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\rewriter.js" />
+    <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\scope.js" />
+    <Compile Include="node_modules\i2c\node_modules\repl\index.js" />
+    <Compile Include="node_modules\i2c\node_modules\repl\lib\repl.js" />
+    <Compile Include="node_modules\i2c\node_modules\repl\test.js" />
+    <Compile Include="node_modules\i2c\node_modules\underscore\index.js" />
+    <Compile Include="node_modules\i2c\node_modules\underscore\underscore-min.js" />
+    <Compile Include="node_modules\i2c\node_modules\underscore\underscore.js" />
     <Compile Include="public\javascripts\layout.js" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
