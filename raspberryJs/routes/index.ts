@@ -35,6 +35,9 @@ router.post('/layout', function (req, res, next) {
     //motor.drive(volt, 0, "break");
     //motor.drive(volt, 1, "break");
 
+    motor.getStatus(0);
+    motor.getStatus(1); 
+
     switch (str){
     	   case "TopLeft":
 	   	motor.drive(volt, 0, "pos");

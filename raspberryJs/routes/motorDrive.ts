@@ -69,4 +69,33 @@
             return true;
 
         }
+	
+	public getStatus(motorNum: number): number {
+	       
+	   var controlData = FAULT_REG;
+                console.log("GetstatusExe!\n");
+	   
+            if (motorNum == 0) {
+                console.log("motor0 status!\n");
+		wire0.readBytes(controlData, 1, function(err, res) {
+					 if(res==1){
+						console.log("motor0 Error!\n");
+					 }else{
+						console.log("motor0 Normal!\n");
+					 }
+		});
+            } else {
+                console.log("motor1 Status!\n");
+		wire1.readBytes(controlData, 1, function(err, res) {
+					 if(res==1){
+						console.log("motor1 Error!\n");
+					}else{
+						console.log("motor1 Normal!\n");
+					}
+		});
+            }
+	    return 0;
+ 
+	}
+
     }
