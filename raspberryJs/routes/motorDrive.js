@@ -1,3 +1,4 @@
+"use strict";
 var DRV8830_0 = 0x60;
 var DRV8830_1 = 0x62;
 var CONTROL_REG = 0x00;
@@ -59,9 +60,9 @@ var motorDrive = (function () {
     motorDrive.prototype.getStatus = function (motorNum) {
         var controlData = FAULT_REG;
         var motorMessage;
-        console.log("GetstatusExe!\n");
         if (motorNum == 0) {
             wire0.readBytes(controlData, 1, function (err, res) {
+                console.log("motorStatus:" + res[0]);
                 if ((res[0] & 0x01) != 0) {
                     if ((res[0] & 0x02) != 0) {
                         motorMessage = "motor0 status is OCP!";
@@ -112,6 +113,5 @@ var motorDrive = (function () {
         return motorMessage;
     };
     return motorDrive;
-})();
+}());
 exports.motorDrive = motorDrive;
-//# sourceMappingURL=motorDrive.js.map

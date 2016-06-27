@@ -74,10 +74,11 @@
 
             var controlData = FAULT_REG;
             var motorMessage: string;
-            console.log("GetstatusExe!\n");
-
+            
             if (motorNum == 0) {
-                wire0.readBytes(controlData, 1, function (err, res) {
+                wire0.readBytes(controlData, 1, function (err, res){
+			console.log("motorStatus:"+res[0]);
+	
                     if ((res[0] & 0x01) != 0) {//一番下位のビット判定
                         if ((res[0] & 0x02) != 0) {
                             motorMessage = "motor0 status is OCP!";
