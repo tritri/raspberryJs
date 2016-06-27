@@ -1,4 +1,3 @@
-"use strict";
 var DRV8830_0 = 0x60;
 var DRV8830_1 = 0x62;
 var CONTROL_REG = 0x00;
@@ -59,31 +58,60 @@ var motorDrive = (function () {
     };
     motorDrive.prototype.getStatus = function (motorNum) {
         var controlData = FAULT_REG;
+        var motorMessage;
         console.log("GetstatusExe!\n");
         if (motorNum == 0) {
-            console.log("motor0 status!\n");
             wire0.readBytes(controlData, 1, function (err, res) {
-                if (res == 1) {
-                    console.log("motor0 Error!\n");
+                if ((res[0] & 0x01) != 0) {
+                    if ((res[0] & 0x02) != 0) {
+                        motorMessage = "motor0 status is OCP!";
+                    }
+                    else if ((res[0] & 0x04) != 0) {
+                        motorMessage = "motor0 status is UVLO!";
+                    }
+                    else if ((res[0] & 0x08) != 0) {
+                        motorMessage = "motor0 status is OTS!";
+                    }
+                    else if ((res[0] & 0x10) != 0) {
+                        motorMessage = "motor0 status is ILIMIT!";
+                    }
+                    else {
+                        motorMessage = "motor0 Error is other!";
+                    }
                 }
                 else {
-                    console.log("motor0 Normal!\n");
+                    motorMessage = "motor0 Normal!";
                 }
             });
         }
         else {
-            console.log("motor1 Status!\n");
             wire1.readBytes(controlData, 1, function (err, res) {
-                if (res == 1) {
-                    console.log("motor1 Error!\n");
+                if ((res[0] & 0x01) != 0) {
+                    if ((res[0] & 0x02) != 0) {
+                        motorMessage = "motor1 status is OCP!";
+                    }
+                    else if ((res[0] & 0x04) != 0) {
+                        motorMessage = "motor1 status is UVLO!";
+                    }
+                    else if ((res[0] & 0x08) != 0) {
+                        motorMessage = "motor1 status is OTS!";
+                    }
+                    else if ((res[0] & 0x10) != 0) {
+                        motorMessage = "motor1 status is ILIMIT!";
+                    }
+                    else {
+                        motorMessage = "motor1 Error is other!";
+                    }
                 }
                 else {
-                    console.log("motor1 Normal!\n");
+                    motorMessage = "motor1 Normal!";
                 }
             });
         }
-        return 0;
+        console.log(motorMessage);
+        return motorMessage;
     };
     return motorDrive;
-}());
+})();
 exports.motorDrive = motorDrive;
+//# sourceMappingURL=motorDrive.js.map

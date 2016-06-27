@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="node_modules\" />
     <Folder Include="node_modules\i2c\" />
     <Folder Include="node_modules\i2c\build\" />
     <Folder Include="node_modules\i2c\build\Release\" />

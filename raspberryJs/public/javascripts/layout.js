@@ -28,7 +28,7 @@ function doActionButton(e,id) {
     var callback = function () {
         var target = document.getElementById("buttontxt");//ここの文字列はlayout.jade中の文字を返したい要素のidを指定する
         var res = JSON.parse(ajax.getResponse());
-        target.textContent = "you send::" + res.messagetxt;//ここから指定したlayout.jadeの要素にテキストとして書き込む
+        target.textContent = "Motor Status" + res.msgMotor0+" : "+res.msgMotor1;//ここから指定したlayout.jadeの要素にテキストとして書き込む
     }
     ajax = new AjaxObject('/layout?buttonName=' + 
                     input.value, callback);//ここからindex.tsへpostされる(layoutが名前となりコントローラーにバインドされる関数がどこから来たのか区別するために使われます、?以降がクエリ文字列としてコントローラーに引き渡されます)

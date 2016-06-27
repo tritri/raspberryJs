@@ -69,33 +69,53 @@
             return true;
 
         }
-	
-	public getStatus(motorNum: number): number {
-	       
-	   var controlData = FAULT_REG;
-                console.log("GetstatusExe!\n");
-	   
+
+        public getStatus(motorNum: number): string {
+
+            var controlData = FAULT_REG;
+            var motorMessage: string;
+            console.log("GetstatusExe!\n");
+
             if (motorNum == 0) {
-                console.log("motor0 status!\n");
-		wire0.readBytes(controlData, 1, function(err, res) {
-					 if(res==1){
-						console.log("motor0 Error!\n");
-					 }else{
-						console.log("motor0 Normal!\n");
-					 }
-		});
+                wire0.readBytes(controlData, 1, function (err, res) {
+                    if ((res[0] & 0x01) != 0) {//一番下位のビット判定
+                        if ((res[0] & 0x02) != 0) {
+                            motorMessage = "motor0 status is OCP!";
+                        } else if ((res[0] & 0x04) != 0) {
+                            motorMessage = "motor0 status is UVLO!";
+                        } else if ((res[0] & 0x08) != 0) {
+                            motorMessage = "motor0 status is OTS!";
+                        } else if ((res[0] & 0x10) != 0) {
+                            motorMessage = "motor0 status is ILIMIT!";
+                        } else {
+                            motorMessage = "motor0 Error is other!";
+                        }
+                    } else {
+                        motorMessage = "motor0 Normal!";
+                    }
+                });
             } else {
-                console.log("motor1 Status!\n");
-		wire1.readBytes(controlData, 1, function(err, res) {
-					 if(res==1){
-						console.log("motor1 Error!\n");
-					}else{
-						console.log("motor1 Normal!\n");
-					}
-		});
+                wire1.readBytes(controlData, 1, function (err, res) {
+                    if ((res[0] & 0x01) != 0) {//一番下位のビット判定
+                        if ((res[0] & 0x02) != 0) {
+                            motorMessage = "motor1 status is OCP!";
+                        } else if ((res[0] & 0x04) != 0) {
+                            motorMessage = "motor1 status is UVLO!";
+                        } else if ((res[0] & 0x08) != 0) {
+                            motorMessage = "motor1 status is OTS!";
+                        } else if ((res[0] & 0x10) != 0) {
+                            motorMessage = "motor1 status is ILIMIT!";
+                        } else {
+                            motorMessage = "motor1 Error is other!";
+                        }
+
+                    } else {
+                        motorMessage = "motor1 Normal!";
+                    }
+                });
             }
-	    return 0;
- 
-	}
+            console.log(motorMessage);
+            return motorMessage;
+        }
 
     }
