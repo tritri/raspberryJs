@@ -31,7 +31,8 @@ router.post('/layout', function (req, res, next) {
     var str = req.query['buttonName'];
     var volt = 2.0;
     var motor = new motorP.motorDrive();
-
+    var str0: string = "No Status";
+    var str1: string = "No Status";
     //motor.drive(volt, 0, "break");
     //motor.drive(volt, 1, "break");
 
@@ -72,23 +73,20 @@ router.post('/layout', function (req, res, next) {
             motor.drive(volt, 0, "neg");
             motor.drive(volt, 1, "standy");
             break;
-           case "DriveCheck":
-            motor.getStatus(0);
-            motor.getStatus(1);
+        case "DriveCheck":
+            str0 = motor.getStatus(0);
+            str1 = motor.getStatus(1);
             break;
-           default:
-               var str0 = motor.drive(volt, 0, "standy");
-               var str1 = motor.drive(volt, 1, "standy");
-               res.json({
-                   msgMotor0: str0,
-                   msgMotor1: str1
-               });
+        default:
+            motor.drive(volt, 0, "standy");
+            motor.drive(volt, 1, "standy");
     }
 
 
     res.json(
         {
-            messagetxt: str,
+            msgMotor0: str0,
+            msgMotor1: str1
         }
     );
 });

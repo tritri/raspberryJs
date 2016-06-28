@@ -1,4 +1,3 @@
-"use strict";
 var DRV8830_0 = 0x60;
 var DRV8830_1 = 0x62;
 var CONTROL_REG = 0x00;
@@ -45,7 +44,6 @@ var motorDrive = (function () {
         var byteData = (vSet << 2) | drive;
         console.log(byteData);
         var motorNo = motorNum;
-        //var wire;
         if (motorNo == 0) {
             console.log("motor0 Start!\n");
             wire0.writeBytes(controlData, [byteData], function (err, res) { });
@@ -54,30 +52,26 @@ var motorDrive = (function () {
             console.log("motor1 Start!\n");
             wire1.writeBytes(controlData, [byteData], function (err, res) { });
         }
-        //wire.writeBytes(0x16, [0x05], function(err, res){});
         return true;
     };
     motorDrive.prototype.getStatus = function (motorNum) {
         var controlData = FAULT_REG;
         var motorMessage;
         if (motorNum == 0) {
+            motorMessage = "motor0 status is ";
             wire0.readBytes(controlData, 1, function (err, res) {
-                console.log("motorStatus:" + res[0]);
                 if ((res[0] & 0x01) != 0) {
                     if ((res[0] & 0x02) != 0) {
-                        motorMessage = "motor0 status is OCP!";
+                        motorMessage += ",OCP!";
                     }
-                    else if ((res[0] & 0x04) != 0) {
-                        motorMessage = "motor0 status is UVLO!";
+                    if ((res[0] & 0x04) != 0) {
+                        motorMessage += ",UVLO!";
                     }
-                    else if ((res[0] & 0x08) != 0) {
-                        motorMessage = "motor0 status is OTS!";
+                    if ((res[0] & 0x08) != 0) {
+                        motorMessage += ",OTS!";
                     }
-                    else if ((res[0] & 0x10) != 0) {
-                        motorMessage = "motor0 status is ILIMIT!";
-                    }
-                    else {
-                        motorMessage = "motor0 Error is other!";
+                    if ((res[0] & 0x10) != 0) {
+                        motorMessage += ",ILIMIT!";
                     }
                 }
                 else {
@@ -86,22 +80,20 @@ var motorDrive = (function () {
             });
         }
         else {
+            motorMessage = "motor1 status is ";
             wire1.readBytes(controlData, 1, function (err, res) {
                 if ((res[0] & 0x01) != 0) {
                     if ((res[0] & 0x02) != 0) {
-                        motorMessage = "motor1 status is OCP!";
+                        motorMessage += ",OCP!";
                     }
-                    else if ((res[0] & 0x04) != 0) {
-                        motorMessage = "motor1 status is UVLO!";
+                    if ((res[0] & 0x04) != 0) {
+                        motorMessage += ",UVLO!";
                     }
-                    else if ((res[0] & 0x08) != 0) {
-                        motorMessage = "motor1 status is OTS!";
+                    if ((res[0] & 0x08) != 0) {
+                        motorMessage += ",OTS!";
                     }
-                    else if ((res[0] & 0x10) != 0) {
-                        motorMessage = "motor1 status is ILIMIT!";
-                    }
-                    else {
-                        motorMessage = "motor1 Error is other!";
+                    if ((res[0] & 0x10) != 0) {
+                        motorMessage += ",ILIMIT!";
                     }
                 }
                 else {
@@ -113,5 +105,6 @@ var motorDrive = (function () {
         return motorMessage;
     };
     return motorDrive;
-}());
+})();
 exports.motorDrive = motorDrive;
+//# sourceMappingURL=motorDrive.js.map

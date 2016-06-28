@@ -1,4 +1,3 @@
-"use strict";
 var express = require('express');
 //import i2c = require('i2c');//i2cモジュールの読み込み
 var motorP = require('./motorDrive'); //外部モジュールmotorDriveの読みこみ
@@ -25,6 +24,8 @@ router.post('/layout', function (req, res, next) {
     var str = req.query['buttonName'];
     var volt = 2.0;
     var motor = new motorP.motorDrive();
+    var str0 = "No Status";
+    var str1 = "No Status";
     //motor.drive(volt, 0, "break");
     //motor.drive(volt, 1, "break");
     switch (str) {
@@ -65,19 +66,17 @@ router.post('/layout', function (req, res, next) {
             motor.drive(volt, 1, "standy");
             break;
         case "DriveCheck":
-            motor.getStatus(0);
-            motor.getStatus(1);
+            str0 = motor.getStatus(0);
+            str1 = motor.getStatus(1);
             break;
         default:
-            var str0 = motor.drive(volt, 0, "standy");
-            var str1 = motor.drive(volt, 1, "standy");
-            res.json({
-                msgMotor0: str0,
-                msgMotor1: str1
-            });
+            motor.drive(volt, 0, "standy");
+            motor.drive(volt, 1, "standy");
     }
     res.json({
-        messagetxt: str,
+        msgMotor0: str0,
+        msgMotor1: str1
     });
 });
 module.exports = router;
+//# sourceMappingURL=index.js.map
