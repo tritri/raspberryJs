@@ -20,6 +20,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
+//以下のような形でnpmでインストールされたjavascriptモジュールのパスを指定する。
+//これでhtml側でパスを指定しなくてもよくなる
+app.use('/bootstrap-slider', express.static(__dirname + '/node_modules/bootstrap-slider/dist/'));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');

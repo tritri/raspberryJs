@@ -4,7 +4,6 @@ import motorP = require('./motorDrive');//外部モジュールmotorDriveの読�
 
 var router = express.Router();
 
-
 /*
 // GET home page. 
 router.get('/', function (req: express.Request, res: express.Response, next: Function) {
@@ -28,7 +27,8 @@ router.post('/', function (req, res, next) {
 //こちらはlayout.jsよりpostされた場合、
 //AjaxObjectのコンストラクタへの引数にlayoutが指定されている
 router.post('/layout', function (req, res, next) {
-    var str = req.query['buttonName'];
+    var strControl = req.query['buttonName'];
+    var strVolume = req.query['sliderValue'];
     var volt = 2.0;
     var motor = new motorP.motorDrive();
     var str0: string = "No Status";
@@ -36,57 +36,61 @@ router.post('/layout', function (req, res, next) {
     //motor.drive(volt, 0, "break");
     //motor.drive(volt, 1, "break");
 
-    switch (str) {
-    	   case "TopLeft":
-            motor.drive(volt, 0, "pos");
-            motor.drive(volt, 1, "standy");
-            break;
-    	   case "TopCenter":
-            motor.drive(volt, 0, "pos");
-            motor.drive(volt, 1, "pos");
-            break;
-    	   case "TopRight":
-            motor.drive(volt, 0, "standy");
-            motor.drive(volt, 1, "pos");
-            break;
-    	   case "CenterLeft":
-            motor.drive(volt, 0, "pos");
-            motor.drive(volt, 1, "neg");
-            break;
-    	   case "Center":
-            motor.drive(volt, 0, "break");
-            motor.drive(volt, 1, "break");
-            break;
-    	   case "CenterRight":
-            motor.drive(volt, 0, "neg");
-            motor.drive(volt, 1, "pos");
-            break;
-    	   case "DownLeft":
-            motor.drive(volt, 0, "standy");
-            motor.drive(volt, 1, "neg");
-            break;
-    	   case "DownCenter":
-            motor.drive(volt, 0, "neg");
-            motor.drive(volt, 1, "neg");
-            break;
-    	   case "DownRight":
-            motor.drive(volt, 0, "neg");
-            motor.drive(volt, 1, "standy");
-            break;
-        case "DriveCheck":
-            str0 = motor.getStatus(0);
-            str1 = motor.getStatus(1);
-            break;
-        default:
-            motor.drive(volt, 0, "standy");
-            motor.drive(volt, 1, "standy");
-    }
+    volt = (strVolume*(5.06-0.48)/100+0.48);
 
+    if (strControl != undefined) {
+        switch (strControl) {
+            case "TopLeft":
+                motor.drive(volt, 0, "pos");
+                motor.drive(volt, 1, "standy");
+                break;
+            case "TopCenter":
+                motor.drive(volt, 0, "pos");
+                motor.drive(volt, 1, "pos");
+                break;
+            case "TopRight":
+                motor.drive(volt, 0, "standy");
+                motor.drive(volt, 1, "pos");
+                break;
+            case "CenterLeft":
+                motor.drive(volt, 0, "pos");
+                motor.drive(volt, 1, "neg");
+                break;
+            case "Center":
+                motor.drive(volt, 0, "break");
+                motor.drive(volt, 1, "break");
+                break;
+            case "CenterRight":
+                motor.drive(volt, 0, "neg");
+                motor.drive(volt, 1, "pos");
+                break;
+            case "DownLeft":
+                motor.drive(volt, 0, "standy");
+                motor.drive(volt, 1, "neg");
+                break;
+            case "DownCenter":
+                motor.drive(volt, 0, "neg");
+                motor.drive(volt, 1, "neg");
+                break;
+            case "DownRight":
+                motor.drive(volt, 0, "neg");
+                motor.drive(volt, 1, "standy");
+                break;
+            case "DriveCheck":
+                str0 = motor.getStatus(0);
+                str1 = motor.getStatus(1);
+                break;
+            default:
+                motor.drive(volt, 0, "standy");
+                motor.drive(volt, 1, "standy");
+        }
+    }
 
     res.json(
         {
             msgMotor0: str0,
-            msgMotor1: str1
+            msgMotor1: str1,
+            msgVoltage: volt
         }
     );
 });

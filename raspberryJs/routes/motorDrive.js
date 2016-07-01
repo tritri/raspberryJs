@@ -6,7 +6,7 @@ var STANBY = 0x00;
 var NEG_ROT = 0x02;
 var POS_ROT = 0x01;
 var BREAK = 0x03;
-var i2c = require('i2c');
+//var i2c = require('i2c');
 var addr = DRV8830_0;
 var wire0;
 var wire1;
@@ -15,8 +15,8 @@ var motorDrive = (function () {
      * コンストラクタ
      */
     function motorDrive() {
-        wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
-        wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
+        //wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
+        //wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
     }
     /**
      *  GET users listing.

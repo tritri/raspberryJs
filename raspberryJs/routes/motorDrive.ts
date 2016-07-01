@@ -7,7 +7,7 @@
     const NEG_ROT = 0x02;
     const POS_ROT = 0x01;
     const BREAK = 0x03;
-    var i2c = require('i2c');
+    //var i2c = require('i2c');
     var addr = DRV8830_0;
 
     var wire0;
@@ -22,8 +22,8 @@
          */
         constructor() {
 
-            wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
-            wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
+            //wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
+            //wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
         }
     
         /**
@@ -92,7 +92,7 @@
                     }
                 });
             } else {
-                motorMessage = "motor1 status is ";
+                motorMessage = "motor1 status is ";                
                 wire1.readBytes(controlData, 1, function (err, res) {
                     if ((res[0] & 0x01) != 0) {//一番下位のビット判定
                         if ((res[0] & 0x02) != 0) {

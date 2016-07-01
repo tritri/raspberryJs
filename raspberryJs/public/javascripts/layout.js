@@ -34,6 +34,22 @@ function doActionButton(e,id) {
                     input.value, callback);//ここからindex.tsへpostされる(layoutが名前となりコントローラーにバインドされる関数がどこから来たのか区別するために使われます、?以降がクエリ文字列としてコントローラーに引き渡されます)
 }
 
+//スライダーイベントハンドラ
+$(function () {
+    
+    var callback = function () {
+        var target = document.getElementById("voltagetxt");//ここの文字列はlayout.jade中の文字を返したい要素のidを指定する
+        var res = JSON.parse(ajax.getResponse());
+        if(res!==null){
+            target.textContent = res.msgVoltage;
+        }
+    }
+    $('#volume').slider().on('slide', function (e) {
+        console.log(e.value);
+        ajax = new AjaxObject('/layout?sliderValue=' + 
+                    e.value, callback);
+    });
+});
 
 function AjaxObject(url, callback) {
     var response = null;

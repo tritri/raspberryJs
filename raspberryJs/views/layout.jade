@@ -30,6 +30,10 @@ html(lang='ja')
         //ajaxで作ったjsファイルの読みこみ
         script(src='javascripts/layout.js', type="text/javascript", language="JavaScript")
         script(src='./motorDrive.js')
+        
+        //スライダー読み込み
+        link(href='/bootstrap-slider/css/bootstrap-slider.css', rel='stylesheet')
+        script(src='/bootstrap-slider/bootstrap-slider.js', type="text/javascript", language="JavaScript")
 
     body(onload="init()").container
         nav.navbar.navbar-default
@@ -125,6 +129,14 @@ html(lang='ja')
                             button.btn.btn-primary( type="button",class="buttonsDrive", id="driveCheck",value="DriveCheck" ,onclick="doActionButton(arguments[0],'driveCheck');") ステータス更新
                             p ここにどのボタンが押されたか表示
                             p(id="buttontxt")
+                        div.row
+                            div.col-sm-4
+                                p モーター電圧調整
+                            div.col-sm-4
+                                input( id="volume", type="text", data-slider-id="volumeSlider" ,data-slider-min="0" ,data-slider-max="100" ,data-slider-step="1" ,data-slider-value="50" ,data-slider-tooltip="hide")
+                            div.col-sm-4
+                                p(id="voltagetxt",style="display:inline;")
+                                b V
             div#setting.tab-pane
                 p.
                     設定ページ予定。<br>Etsy mixtape wayfarers, ethical wes anderson
