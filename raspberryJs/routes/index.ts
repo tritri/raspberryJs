@@ -1,7 +1,7 @@
 ﻿import express = require('express');
 //import i2c = require('i2c');//i2cモジュールの読み込み
 import motorP = require('./motorDrive');//外部モジュールmotorDriveの読みこみ
-
+var beforeVolt:number = 2.0;
 var router = express.Router();
 
 /*
@@ -28,17 +28,28 @@ router.post('/', function (req, res, next) {
 //AjaxObjectのコンストラクタへの引数にlayoutが指定されている
 router.post('/layout', function (req, res, next) {
     var strControl = req.query['buttonName'];
-    var strVolume = req.query['sliderValue'];
-    var volt = 2.0;
+    console.log("buttonname"+req.query['buttonName']+"\n");
+    console.log("sliderValue"+req.query['sliderValue']+"\n");
+
+    var strVolume=req.query['sliderValue'];
+    if(typeof strVolume === "undefined"){
+	strVolume = "1.5";
+    }else{
+    	strVolume = req.query['sliderValue'];
+	beforeVolt= Number(strVolume);
+    }
+
+
     var motor = new motorP.motorDrive();
     var str0: string = "No Status";
     var str1: string = "No Status";
-    //motor.drive(volt, 0, "break");
+    //motor.drive(1.5, 0, "fdfsd");
     //motor.drive(volt, 1, "break");
 
-    volt = (strVolume*(5.06-0.48)/100+0.48);
+    volt = (Number(strVolume)*(5.06-0.48)/100+0.48);
+    console.log("calc volt!\n"+"volt:"+ volt+"\n");
 
-    if (strControl != undefined) {
+    //if (strControl != undefined) {
         switch (strControl) {
             case "TopLeft":
                 motor.drive(volt, 0, "pos");
@@ -84,13 +95,13 @@ router.post('/layout', function (req, res, next) {
                 motor.drive(volt, 0, "standy");
                 motor.drive(volt, 1, "standy");
         }
-    }
+    //}
 
     res.json(
         {
             msgMotor0: str0,
             msgMotor1: str1,
-            msgVoltage: volt
+            msgVoltage: String(volt)
         }
     );
 });

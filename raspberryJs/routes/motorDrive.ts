@@ -7,7 +7,7 @@
     const NEG_ROT = 0x02;
     const POS_ROT = 0x01;
     const BREAK = 0x03;
-    //var i2c = require('i2c');
+    var i2c = require('i2c');
     var addr = DRV8830_0;
 
     var wire0;
@@ -22,8 +22,8 @@
          */
         constructor() {
 
-            //wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
-            //wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
+            wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
+            wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
         }
     
         /**
@@ -33,6 +33,7 @@
          * @param queryDatas
          */
         public drive(voltage: number, motorNum: number, driveDir: string): boolean {
+            console.log("drive function reach!\n"+"volt:"+ String(voltage)+"\n");
 
             var vSetF = voltage;//voltクエリにて電圧を取得
             var vSet = ((vSetF * 100)) / 8;
