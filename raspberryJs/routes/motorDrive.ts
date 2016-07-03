@@ -33,7 +33,7 @@
          * @param queryDatas
          */
         public drive(voltage: number, motorNum: number, driveDir: string): boolean {
-            console.log("drive function reach!\n"+"volt:"+ String(voltage)+"\n");
+            //console.log("drive function reach!\n"+"volt:"+ String(voltage)+"\n");
 
             var vSetF = voltage;//voltクエリにて電圧を取得
             var vSet = ((vSetF * 100)) / 8;
@@ -52,15 +52,14 @@
 
             var controlData = CONTROL_REG;
             var byteData = (vSet << 2) | drive;
-            console.log(byteData);
 
             var motorNo = motorNum;
 
             if (motorNo == 0) {
-                console.log("motor0 Start!\n");
+                //console.log("motor0 Start!\n");
                 wire0.writeBytes(controlData, [byteData], function (err, res) { });
             } else {
-                console.log("motor1 Start!\n");
+                //console.log("motor1 Start!\n");
                 wire1.writeBytes(controlData, [byteData], function (err, res) { });
             }
             return true;
@@ -72,9 +71,10 @@
             var motorMessage: string ;
             
             if (motorNum == 0) {
-                motorMessage = "motor0 status is ";
+                motorMessage = "motor0 status is error : ";
                 wire0.readBytes(controlData, 1, function (err, res){
-	
+		    console.log('Motor0 StatusNum : '+String(res[0])+' Status0 : '+String(res[0] & 0x04));
+
                     if ((res[0] & 0x01) != 0) {//一番下位のビット判定
                         if ((res[0] & 0x02) != 0) {
                             motorMessage += ",OCP!";
@@ -88,12 +88,13 @@
                         if ((res[0] & 0x10) != 0) {
                             motorMessage += ",ILIMIT!";
                         }
+			motorMessage += '('+String(res[0])+')';
                     } else {
                         motorMessage = "motor0 Normal!";
                     }
                 });
             } else {
-                motorMessage = "motor1 status is ";                
+                motorMessage = "motor1 status is error : ";                
                 wire1.readBytes(controlData, 1, function (err, res) {
                     if ((res[0] & 0x01) != 0) {//一番下位のビット判定
                         if ((res[0] & 0x02) != 0) {
@@ -108,6 +109,7 @@
                         if ((res[0] & 0x10) != 0) {
                             motorMessage += ",ILIMIT!";
                         }
+			motorMessage += '('+String(res[0])+')';
                     } else {
                         motorMessage = "motor1 Normal!";
                     }
