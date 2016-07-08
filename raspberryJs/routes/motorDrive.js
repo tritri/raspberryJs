@@ -1,4 +1,3 @@
-"use strict";
 var DRV8830_0 = 0x60;
 var DRV8830_1 = 0x62;
 var CONTROL_REG = 0x00;
@@ -109,5 +108,6 @@ var motorDrive = (function () {
         return motorMessage;
     };
     return motorDrive;
-}());
+})();
 exports.motorDrive = motorDrive;
+//# sourceMappingURL=motorDrive.js.map

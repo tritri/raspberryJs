@@ -49,14 +49,14 @@ html(lang='ja')
                 div#bs-example-navbar-collapse-1.collapse.navbar-collapse
                     ul.nav.navbar-nav
                         li.active
-                            a(href="#drive",data-toggle="tab") 操縦
+                            a(href="#drive",data-toggle="tab") Home
                                 span.sr-only (current)
                         li
-                            a( href="#basic", data-toggle="tab") 直接操作
+                            a( href="#basic", data-toggle="tab") キャタピラ操作
                         li
-                            a(href="#setting",data-toggle="tab") 設定
+                            a(href="#setting",data-toggle="tab") モーター直接操作
                         li
-                            a( href="#manual" data-toggle="tab") マニュアル
+                            a( href="#manual" data-toggle="tab") 設定
                         //ドロップダウンメニュー
                         li.dropdown
                             a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false") Dropdown
@@ -138,16 +138,52 @@ html(lang='ja')
                                 p(id="voltagetxt",style="display:inline;")
                                 b V
             div#setting.tab-pane
-                p.
-                    設定ページ予定。<br>Etsy mixtape wayfarers, ethical wes anderson
-                    tofu before they sold out mcsweeney's organic lomo retro fanny pack
-                    lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork
-                    tattooed craft beer, iphone skateboard locavore carles etsy salvia
-                    banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings
-                    gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever
-                    gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice
-                    blog. Scenester cred you probably haven't heard of them, vinyl craft
-                    beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.
+                p モータパラメータ直接実行
+                        div.row
+                            div.col-sm-2 モーター1
+                            div.col-sm-5
+                                div.btn-group(data-toggle="buttons")
+                                    label.btn.btn-primary.active
+                                        input( type="radio",autocomplete="off",id="drive1Pos",name="radio1",value="1Pos",checked)
+                                        | 正転
+                                    label.btn.btn-primary
+                                        input( type="radio",autocomplete="off" ,id="drive1Neg",name="radio1",value="1Neg")
+                                        | 逆転
+                                    label.btn.btn-primary
+                                        input( type="radio",autocomplete="off" ,id="drive1Break",name="radio1",value="1Break")
+                                        | 停止
+                                    label.btn.btn-primary
+                                        input( type="radio",autocomplete="off" ,id="drive1Stanby",name="radio1",value="1Stanby")
+                                        | 惰走
+                            div.col-sm-3
+                                input(type="text" id="inputValueMotor1" value="1")
+                            div.col-sm-2
+                                button.btn.btn-primary( type="button" id="buttonsMotor1Input" value="motor1Input" onclick="doActionMotorButton(arguments[0],'inputValueMotor1');") 実行
+                        div.row
+                            div.col-sm-2 モーター2
+                            div.col-sm-5
+                                div.btn-group(data-toggle="buttons")
+                                    label.btn.btn-primary.active
+                                        input( type="radio",autocomplete="off",id="drive1Pos",name="radio2",value="2Pos",checked)
+                                        | 正転
+                                    label.btn.btn-primary
+                                        input( type="radio",autocomplete="off" ,id="drive1Neg",name="radio2",value="2Neg")
+                                        | 逆転
+                                    label.btn.btn-primary
+                                        input( type="radio",autocomplete="off" ,id="drive1Break",name="radio2",value="2Break")
+                                        | 停止
+                                    label.btn.btn-primary
+                                        input( type="radio",autocomplete="off" ,id="drive1Stanby",name="radio2",value="2Stanby")
+                                        | 惰走
+                            div.col-sm-3
+                                input(type="text" id="inputValueMotor2" value="1")
+                            div.col-sm-2
+                                button.btn.btn-primary( type="button" id="buttonsMotor2Input" value="motor2Input" onclick="doActionMotorButton(arguments[0],'inputValueMotor2');") 実行
+                        div.row
+                            div.col-sm-6
+                                p(id="motor1Status",style="display:inline;") 
+                            div.col-sm-6
+                                p(id="motor2Status",style="display:inline;") 
             div#manual.tab-pane
                 p.
                     マニュアル予定ページ。<br> なんかの文章がここに来る？

@@ -19,7 +19,7 @@ $(function () {
 });
 
 var ajax = null;
-//ボタンクリックイベントハンドラ
+//キャタピラ操作ボタンクリックイベントハンドラ
 //html側では引数としてarguments[0]を与えて下しあ
 function doActionButton(e,id) {
     //var id = e.srcElement.id;//senderとしたeventから送信者のidを取得します
@@ -30,8 +30,31 @@ function doActionButton(e,id) {
         var res = JSON.parse(ajax.getResponse());
         target.textContent = "Motor Status : " + res.msgMotor0+" : "+res.msgMotor1;//ここから指定したlayout.jadeの要素にテキストとして書き込む
     }
-    ajax = new AjaxObject('/layout?buttonName=' + 
+    ajax = new AjaxObject('/driveCrawler?buttonName=' + 
                     input.value, callback);//ここからindex.tsへpostされる(layoutが名前となりコントローラーにバインドされる関数がどこから来たのか区別するために使われます、?以降がクエリ文字列としてコントローラーに引き渡されます)
+}
+//モーター直接操作ボタンクリックイベントハンドラ
+//html側では引数としてarguments[0]を与えて下しあ
+function doActionMotorButton(e, id) {
+    //var id = e.srcElement.id;//senderとしたeventから送信者のidを取得します
+    var input = document.getElementById(id);//ここの文字列はlayout.jade中の文字を得たい要素のidを指定する
+    var radioVal1 = $("input[name='radio1']:checked").val();
+    var radioVal2 = $("input[name='radio2']:checked").val();
+    var callback = function () {
+        var target1 = document.getElementById("motor1Status");//ここの文字列はlayout.jade中の文字を返したい要素のidを指定する
+        var target2 = document.getElementById("motor2Status");//ここの文字列はlayout.jade中の文字を返したい要素のidを指定する
+        var res = JSON.parse(ajax.getResponse());
+        target1.textContent = res.msgMotorDrive;//ここから指定したlayout.jadeの要素にテキストとして書き込む
+        target2.textContent = res.msgMotorVolt;//ここから指定したlayout.jadeの要素にテキストとして書き込む
+    }
+    if (id == 'inputValueMotor1') {
+        ajax = new AjaxObject('/driveMotor?buttonName=' + 
+                    radioVal1+'&voltagePercent='+ input.value, callback);//ここからindex.tsへpostされる(layoutが名前となりコントローラーにバインドされる関数がどこから来たのか区別するために使われます、?以降がクエリ文字列としてコントローラーに引き渡されます)
+
+    } else {
+        ajax = new AjaxObject('/driveMotor?buttonName=' + 
+                    radioVal2 + '&voltagePercent=' + input.value, callback);
+    }
 }
 
 //スライダーイベントハンドラ
@@ -46,7 +69,7 @@ $(function () {
     }
     $('#volume').slider().on('slide', function (e) {
         console.log(e.value);
-        ajax = new AjaxObject('/layout?sliderValue=' + 
+        ajax = new AjaxObject('/driveCrawler?sliderValue=' + 
                     e.value, callback);
     });
 });

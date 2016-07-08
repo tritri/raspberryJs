@@ -27,7 +27,7 @@ router.post('/', function (req, res, next) {
 });
 //こちらはlayout.jsよりpostされた場合、
 //AjaxObjectのコンストラクタへの引数にlayoutが指定されている
-router.post('/layout', function (req, res, next) {
+router.post('/driveCrawler', function (req, res, next) {
     console.log("buttonname"+req.query['buttonName']+"\n");
     console.log("sliderValue"+req.query['sliderValue']+"\n");
 
@@ -109,6 +109,50 @@ router.post('/layout', function (req, res, next) {
             msgMotor0: str0,
             msgMotor1: str1,
             msgVoltage: String(volt)
+        }
+    );
+});
+
+router.post('/driveMotor', function (req, res, next) {
+
+    var motor = new motorP.motorDrive();
+    var strControl = req.query['buttonName'];
+    var strVoltagePercent = req.query['voltagePercent'];
+
+    var volt = (Number(strVoltagePercent) * (5.06 - 0.48) / 100 + 0.48);
+    console.log("buttonname" + req.query['buttonName'] + "\n");
+    
+    switch (strControl) {
+        case "1Pos":
+            motor.drive(volt, 0, "pos");
+            break;
+        case "1Neg":
+            motor.drive(volt, 0, "neg");
+            break;
+        case "1Break":
+            motor.drive(volt, 0, "break");
+            break;
+        case "1Stanby":
+            motor.drive(volt, 0, "standy");
+            break;
+        case "2Pos":
+            motor.drive(volt, 1, "pos");
+            break;
+        case "2Neg":
+            motor.drive(volt, 1, "neg");
+            break;
+        case "2Break":
+            motor.drive(volt, 1, "break");
+            break;
+        case "2Stanby":
+            motor.drive(volt, 1, "standy");
+            break;
+    }
+    
+    res.json(
+        {
+            msgMotorVolt: '電圧: ' + volt+'V',
+            msgMotorDrive: 'もーたーの状態: ' + strControl
         }
     );
 });
