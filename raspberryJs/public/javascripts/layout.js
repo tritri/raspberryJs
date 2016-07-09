@@ -2,6 +2,7 @@
 //onloadイベントハンドラ
 /* onloadイベント発生した時に行う処理を記述 */
 function init() {
+    currentSliderValue = "0"
     alert("ページが読み込まれました");
 }
 
@@ -56,6 +57,8 @@ function doActionMotorButton(e, id) {
                     radioVal2 + '&voltagePercent=' + input.value, callback);
     }
 }
+//スライダーの現在値
+var currentSliderValue;
 
 //スライダーイベントハンドラ
 $(function () {
@@ -68,9 +71,14 @@ $(function () {
         }
     }
     $('#volume').slider().on('slide', function (e) {
-        console.log(e.value);
-        ajax = new AjaxObject('/driveCrawler?sliderValue=' + 
+        if (currentSliderValue != e.value) {
+            console.log(e.value);
+            ajax = new AjaxObject('/driveCrawler?sliderValue=' + 
                     e.value, callback);
+            currentSliderValue = e.value;
+        } else {
+            
+        }
     });
 });
 
