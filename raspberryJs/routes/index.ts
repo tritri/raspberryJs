@@ -55,7 +55,7 @@ router.post('/driveCrawler', function (req, res, next) {
 
     var volt = (Number(strVolume)*(5.06-0.48)/100+0.48);
     console.log("calc volt!\n"+"volt:"+ volt+"\n");
-    /*
+    
     //if (strControl != undefined) {
         switch (strControl) {
             case "TopLeft":
@@ -103,7 +103,7 @@ router.post('/driveCrawler', function (req, res, next) {
                 motor.drive(volt, 1, "standy");
         }
     //}
-    */
+    
     res.json(
         {
             msgMotor0: str0,
