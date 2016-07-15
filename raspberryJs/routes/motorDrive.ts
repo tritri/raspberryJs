@@ -7,7 +7,11 @@
     const NEG_ROT = 0x02;
     const POS_ROT = 0x01;
     const BREAK = 0x03;
+    const deltaV = 0.08;
+    const deltaWait = 100000;//100ms
+
     var i2c = require('i2c');
+    var sleep = require('sleep');
     var addr = DRV8830_0;
 
     var wire0;
@@ -32,35 +36,48 @@
          *http://192.168.1.98:3000/users?num=0&drive=break&volt=1.0
          * @param queryDatas
          */
-        public drive(voltage: number, motorNum: number, driveDir: string): boolean {
+        public drive(voltage: number, voltageBefore: number, motorNum: number, driveDir: string): boolean {
             //console.log("drive function reach!\n"+"volt:"+ String(voltage)+"\n");
+            var counter = 0;
+            while (Math.abs(voltage - voltageBefore) >= deltaV) {
+                var vSetF = voltageBefore;//voltクエリにて電圧を取得
+                var vSet = ((vSetF * 100)) / 8;
+                var drive = STANBY;
 
-            var vSetF = voltage;//voltクエリにて電圧を取得
-            var vSet = ((vSetF * 100)) / 8;
-            var drive = STANBY;
+                var driveStr = driveDir;//driveクエリにて回転方向を取得
 
-            var driveStr = driveDir;//driveクエリにて回転方向を取得
+                if (driveStr == 'pos') {
+                    drive = POS_ROT;
+                } else if (driveStr == 'neg') {
+                    drive = NEG_ROT;
+                } else if (driveStr == 'break') {
+                    drive = BREAK;
+                } else {
+                }
 
-            if (driveStr == 'pos') {
-                drive = POS_ROT;
-            } else if (driveStr == 'neg') {
-                drive = NEG_ROT;
-            } else if (driveStr == 'break') {
-                drive = BREAK;
-            } else {
-            }
+                var controlData = CONTROL_REG;
+                var byteData = (vSet << 2) | drive;
 
-            var controlData = CONTROL_REG;
-            var byteData = (vSet << 2) | drive;
+                var motorNo = motorNum;
+                
+                if (motorNo == 0) {
+                    //console.log("motor0 Start!\n");
+                    wire0.writeBytes(controlData, [byteData], function (err, res) { });
+                } else {
+                    //console.log("motor1 Start!\n");
+                    wire1.writeBytes(controlData, [byteData], function (err, res) { });
+                }
+                
+                if (voltage > voltageBefore) {
+                    voltageBefore += deltaV;
+                } else {
+                    voltageBefore -= deltaV;
+                }
 
-            var motorNo = motorNum;
+                //console.log("Number Calc : " + counter);
+                counter++;
+                sleep.usleep(deltaWait);
 
-            if (motorNo == 0) {
-                //console.log("motor0 Start!\n");
-                wire0.writeBytes(controlData, [byteData], function (err, res) { });
-            } else {
-                //console.log("motor1 Start!\n");
-                wire1.writeBytes(controlData, [byteData], function (err, res) { });
             }
             return true;
         }
