@@ -3,9 +3,11 @@
 import motorP = require('./motorDrive');//外部モジュールmotorDriveの読みこみ
 var beforeVolume: number = 2.0;
 var beforeVoltage: number=0.0;
-var beforeButton:string="standy";
+var beforeButton: string = "standy";
 var router = express.Router();
- 
+var motor0 = new motorP.motorDrive();
+var motor1 = new motorP.motorDrive(); 
+
 //layout.jadeに書いたformのpostはこのように受ける
 //formの属性、action="/"としないとここには飛んでこない
 router.post('/', function (req, res, next) {
@@ -40,8 +42,6 @@ router.post('/driveCrawler', function (req, res, next) {
         beforeVolume= Number(strVolume);
     }
 
-
-    var motor = new motorP.motorDrive();
     var str0: string = "No Status";
     var str1: string = "No Status";
     //motor.drive(1.5, 0, "fdfsd");
@@ -51,50 +51,50 @@ router.post('/driveCrawler', function (req, res, next) {
     console.log("calc volt!\n"+"volt:"+ volt+"\n");
     
     //if (strControl != undefined) {
-        switch (strControl) {
-            case "TopLeft":
-                motor.drive(volt, beforeVoltage, 0, "pos");
-                motor.drive(volt, beforeVoltage, 1, "standy");
-                break;
-            case "TopCenter":
-                motor.drive(volt, beforeVoltage, 0, "pos");
-                motor.drive(volt, beforeVoltage, 1, "pos");
-                break;
-            case "TopRight":
-                motor.drive(volt, beforeVoltage, 0, "standy");
-                motor.drive(volt, beforeVoltage, 1, "pos");
-                break;
-            case "CenterLeft":
-                motor.drive(volt, beforeVoltage, 0, "pos");
-                motor.drive(volt, beforeVoltage, 1, "neg");
-                break;
-            case "Center":
-                motor.drive(volt, beforeVoltage, 0, "break");
-                motor.drive(volt, beforeVoltage, 1, "break");
-                break;
-            case "CenterRight":
-                motor.drive(volt, beforeVoltage, 0, "neg");
-                motor.drive(volt, beforeVoltage, 1, "pos");
-                break;
-            case "DownLeft":
-                motor.drive(volt, beforeVoltage, 0, "standy");
-                motor.drive(volt, beforeVoltage, 1, "neg");
-                break;
-            case "DownCenter":
-                motor.drive(volt, beforeVoltage, 0, "neg");
-                motor.drive(volt, beforeVoltage, 1, "neg");
-                break;
-            case "DownRight":
-                motor.drive(volt, beforeVoltage, 0, "neg");
-                motor.drive(volt, beforeVoltage, 1, "standy");
-                break;
-            case "DriveCheck":
-                str0 = motor.getStatus(0);
-                str1 = motor.getStatus(1);
-                break;
-            default:
-                motor.drive(volt, beforeVoltage, 0, "standy");
-                motor.drive(volt, beforeVoltage, 1, "standy");
+    switch (strControl) {
+        case "TopLeft":
+            motor0.drive(volt, 0, "pos");
+            motor1.drive(volt, 1, "standy");
+            break;
+        case "TopCenter":
+            motor0.drive(volt, 0, "pos");
+            motor1.drive(volt, 1, "pos");
+            break;
+        case "TopRight":
+            motor0.drive(volt, 0, "standy");
+            motor1.drive(volt, 1, "pos");
+            break;
+        case "CenterLeft":
+            motor0.drive(volt, 0, "pos");
+            motor1.drive(volt, 1, "neg");
+            break;
+        case "Center":
+            motor0.drive(volt, 0, "break");
+            motor1.drive(volt, 1, "break");
+            break;
+        case "CenterRight":
+            motor0.drive(volt, 0, "neg");
+            motor1.drive(volt, 1, "pos");
+            break;
+        case "DownLeft":
+            motor0.drive(volt, 0, "standy");
+            motor1.drive(volt, 1, "neg");
+            break;
+        case "DownCenter":
+            motor0.drive(volt, 0, "neg");
+            motor1.drive(volt, 1, "neg");
+            break;
+        case "DownRight":
+            motor0.drive(volt, 0, "neg");
+            motor1.drive(volt, 1, "standy");
+            break;
+        case "DriveCheck":
+            str0 = motor0.getStatus(0);
+            str1 = motor1.getStatus(1);
+            break;
+        default:
+            motor0.drive(volt, 0, "standy");
+            motor1.drive(volt, 1, "standy");
     }
         beforeVoltage = volt;
     //}
@@ -119,28 +119,28 @@ router.post('/driveMotor', function (req, res, next) {
     
     switch (strControl) {
         case "1Pos":
-            motor.drive(volt, beforeVoltage, 0, "pos");
+            motor.drive(volt, 0, "pos");
             break;
         case "1Neg":
-            motor.drive(volt, beforeVoltage, 0, "neg");
+            motor.drive(volt, 0, "neg");
             break;
         case "1Break":
-            motor.drive(volt, beforeVoltage, 0, "break");
+            motor.drive(volt, 0, "break");
             break;
         case "1Stanby":
-            motor.drive(volt, beforeVoltage, 0, "standy");
+            motor.drive(volt, 0, "standy");
             break;
         case "2Pos":
-            motor.drive(volt, beforeVoltage, 1, "pos");
+            motor.drive(volt, 1, "pos");
             break;
         case "2Neg":
-            motor.drive(volt, beforeVoltage, 1, "neg");
+            motor.drive(volt, 1, "neg");
             break;
         case "2Break":
-            motor.drive(volt, beforeVoltage, 1, "break");
+            motor.drive(volt, 1, "break");
             break;
         case "2Stanby":
-            motor.drive(volt, beforeVoltage, 1, "standy");
+            motor.drive(volt, 1, "standy");
             break;
     }
     beforeVoltage = volt;

@@ -27,9 +27,11 @@ function doActionButton(e,id) {
     var input = document.getElementById(id);//ここの文字列はlayout.jade中の文字を得たい要素のidを指定する
 
     var callback = function () {
+        var targetVoltTxt = document.getElementById("voltagetxt")
         var target = document.getElementById("buttontxt");//ここの文字列はlayout.jade中の文字を返したい要素のidを指定する
         var res = JSON.parse(ajax.getResponse());
         target.textContent = "Motor Status : " + res.msgMotor0+" : "+res.msgMotor1;//ここから指定したlayout.jadeの要素にテキストとして書き込む
+        targetVoltTxt.textContent = res.msgVoltage;
     }
     ajax = new AjaxObject('/driveCrawler?buttonName=' + 
                     input.value, callback);//ここからindex.tsへpostされる(layoutが名前となりコントローラーにバインドされる関数がどこから来たのか区別するために使われます、?以降がクエリ文字列としてコントローラーに引き渡されます)

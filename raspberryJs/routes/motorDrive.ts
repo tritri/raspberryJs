@@ -20,7 +20,9 @@
 
     export class motorDrive {
 
-
+        
+        private beforeDriveDir: string = "standy";
+        private voltageBefore: number = 0;
         /**
          * コンストラクタ
          */
@@ -36,11 +38,12 @@
          *http://192.168.1.98:3000/users?num=0&drive=break&volt=1.0
          * @param queryDatas
          */
-        public drive(voltage: number, voltageBefore: number, motorNum: number, driveDir: string): boolean {
+        public drive(voltage: number, motorNum: number, driveDir: string): boolean {
             //console.log("drive function reach!\n"+"volt:"+ String(voltage)+"\n");
             var counter = 0;
-            while (Math.abs(voltage - voltageBefore) >= deltaV) {
-                var vSetF = voltageBefore;//voltクエリにて電圧を取得
+            while (Math.abs(voltage - this.voltageBefore) >= deltaV
+                || driveDir != this.beforeDriveDir) {
+                var vSetF = this.voltageBefore;//voltクエリにて電圧を取得
                 var vSet = ((vSetF * 100)) / 8;
                 var drive = STANBY;
 
@@ -68,12 +71,12 @@
                     wire1.writeBytes(controlData, [byteData], function (err, res) { });
                 }
                 
-                if (voltage > voltageBefore) {
-                    voltageBefore += deltaV;
-                } else {
-                    voltageBefore -= deltaV;
+                if (voltage > this.voltageBefore) {
+                    this.voltageBefore += deltaV;
+                } else if (voltage < this.voltageBefore) {
+                    this.voltageBefore -= deltaV;
                 }
-
+                this.beforeDriveDir = driveDir;
                 //console.log("Number Calc : " + counter);
                 counter++;
                 sleep.usleep(deltaWait);
