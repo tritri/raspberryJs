@@ -1,3 +1,4 @@
+"use strict";
 var DRV8830_0 = 0x60;
 var DRV8830_1 = 0x62;
 var CONTROL_REG = 0x00;
@@ -8,8 +9,8 @@ var POS_ROT = 0x01;
 var BREAK = 0x03;
 var deltaV = 0.08;
 var deltaWait = 100000; //100ms
-var i2c = require('i2c');
-var sleep = require('sleep');
+//var i2c = require('i2c');
+//var sleep = require('sleep');
 var addr = DRV8830_0;
 var wire0;
 var wire1;
@@ -20,8 +21,8 @@ var motorDrive = (function () {
     function motorDrive() {
         this.beforeDriveDir = "standy";
         this.voltageBefore = 0;
-        wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
-        wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
+        //wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
+        //wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
     }
     /**
      *  GET users listing.
@@ -69,7 +70,6 @@ var motorDrive = (function () {
             this.beforeDriveDir = driveDir;
             //console.log("Number Calc : " + counter);
             counter++;
-            sleep.usleep(deltaWait);
         }
         return true;
     };
@@ -127,6 +127,6 @@ var motorDrive = (function () {
         return motorMessage;
     };
     return motorDrive;
-})();
+}());
 exports.motorDrive = motorDrive;
 //# sourceMappingURL=motorDrive.js.map

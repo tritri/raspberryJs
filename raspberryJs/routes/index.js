@@ -1,3 +1,4 @@
+"use strict";
 var express = require('express');
 //import i2c = require('i2c');//i2cモジュールの読み込み
 var motorP = require('./motorDrive'); //外部モジュールmotorDriveの読みこみ
