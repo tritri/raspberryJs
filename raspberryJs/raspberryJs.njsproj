@@ -89,6 +89,7 @@
     <Content Include="README.md" />
     <TypeScriptCompile Include="routes\layout.ts" />
     <TypeScriptCompile Include="routes\index.ts" />
+    <TypeScriptCompile Include="routes\checkVoltagePower.ts" />
     <TypeScriptCompile Include="routes\motorDrive.ts" />
     <TypeScriptCompile Include="routes\users.ts" />
     <TypeScriptCompile Include="Scripts\typings\express-serve-static-core\express-serve-static-core.d.ts" />

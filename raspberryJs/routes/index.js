@@ -2,6 +2,7 @@
 var express = require('express');
 //import i2c = require('i2c');//i2cモジュールの読み込み
 var motorP = require('./motorDrive'); //外部モジュールmotorDriveの読みこみ
+var adconverter = require('./checkVoltagePower');
 var beforeVolume = 2.0;
 var beforeVoltage = 0.0;
 var beforeButton = "standy";
@@ -134,6 +135,14 @@ router.post('/driveMotor', function (req, res, next) {
     res.json({
         msgMotorVolt: '電圧: ' + volt + 'V',
         msgMotorDrive: 'もーたーの状態: ' + strControl
+    });
+});
+router.post('/checkVoltage', function (req, res, next) {
+    console.log("checkVoltage!!!!!\n");
+    var addata = new adconverter.checkVoltagePower;
+    var volt = 5.0;
+    res.json({
+        msgPowerVolt: '電圧: ' + addata.checkVoltage() + 'V'
     });
 });
 module.exports = router;

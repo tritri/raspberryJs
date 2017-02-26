@@ -10,8 +10,8 @@
     const deltaV = 0.08;
     const deltaWait = 100000;//100ms
 
-    var i2c = require('i2c');
-    var sleep = require('sleep');
+    var i2c = require('i2c');//i2cなしのデバッグの場合はここをコメントアウト
+    var sleep = require('sleep');//i2cなしのデバッグの場合はここをコメントアウト
     var addr = DRV8830_0;
 
     var wire0;
@@ -27,7 +27,7 @@
          * コンストラクタ
          */
         constructor() {
-
+            //i2cなしのデバッグの場合はここをコメントアウト
             wire0 = new i2c(DRV8830_0, { device: '/dev/i2c-1', debug: false });
             wire1 = new i2c(DRV8830_1, { device: '/dev/i2c-1', debug: false });
         }
@@ -79,7 +79,8 @@
                 this.beforeDriveDir = driveDir;
                 //console.log("Number Calc : " + counter);
                 counter++;
-                sleep.usleep(deltaWait);
+                
+                sleep.usleep(deltaWait);//i2cなしのデバッグの場合はここをコメントアウト
 
             }
             return true;

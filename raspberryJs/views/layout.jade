@@ -180,6 +180,12 @@ html(lang='ja')
                             div.col-sm-2
                                 button.btn.btn-primary( type="button" id="buttonsMotor2Input" value="motor2Input" onclick="doActionMotorButton(arguments[0],'inputValueMotor2');") 実行
                         div.row
+                            div.col-sm-2 電圧監視
+                            div.col-sm-8
+                                input(type="text" id="inputValueMotor2" value="1")
+                            div.col-sm-2
+                                button.btn.btn-primary( type="button" id="buttonsGetVoltageOutput" value="getVoltageOutput" onclick="doActionGetVoltageButton(arguments[0],'buttonsGetVoltageOutput');") 実行
+                        div.row
                             div.col-sm-6
                                 p(id="motor1Status",style="display:inline;") 
                             div.col-sm-6
