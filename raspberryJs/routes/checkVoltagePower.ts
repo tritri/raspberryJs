@@ -13,6 +13,7 @@
         
         private beforeDriveDir: string = "standy";
         private voltageBefore: number = 0;
+        private raw: number = 0;
         /**
          * コンストラクタ
          */
@@ -34,7 +35,7 @@
             });
 
             var bufPresData: Array<number>;
-            var raw: number;
+            //var raw: number=0;
             var voltage: number;
             var volParBit: number;
             sleep.usleep(deltaWait);
@@ -44,10 +45,10 @@
                     console.log("i2c read error!\n");
                 } else {
                     console.log("res!!! : " + res + "\n");
-                    raw = res[0] << 8;
-                    raw = raw | res[1];
-                    if (raw > 32767) {
-                        raw -= 65535;
+                    this.raw = res[0] << 8;
+                    this.raw = this.raw | res[1];
+                    if (this.raw > 32767) {
+                        this.raw -= 65535;
                     }
                 }
             });
@@ -65,10 +66,10 @@
                 }
             });
             */
-            console.log("raw!!! : " + raw + "\n");
+            console.log("raw!!! : " + this.raw + "\n");
 
             volParBit = 2.048 / 32767;
-            voltage = volParBit * raw;
+            voltage = volParBit * this.raw;
             console.log("power voltage : "+voltage+"\n");
             return voltage;
 
