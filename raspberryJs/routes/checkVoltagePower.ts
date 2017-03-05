@@ -40,18 +40,19 @@
             sleep.usleep(deltaWait);
 
             wire.read(2, function (err, res) {
+                var _this = this;
                 if (err) {
                     console.log("i2c read error!\n");
                 } else {
                     console.log("res!!! : " + res + "\n");
-                    raw = res[0] << 8;
-                    raw = raw | res[1];
-                    if (raw > 32767) {
-                        raw -= 65535;
+                    _this.raw = res[0] << 8;
+                    _this.raw = _this.raw | res[1];
+                    if (_this.raw > 32767) {
+                        _this.raw -= 65535;
                     }
-                    console.log("raw!!! : " + raw + "\n");
                 }
             });
+            console.log("raw!!! : " + raw + "\n");
 
             volParBit = 2.048 / 32767;
             voltage = volParBit * raw;
