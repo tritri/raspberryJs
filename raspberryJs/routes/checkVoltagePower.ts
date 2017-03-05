@@ -50,6 +50,9 @@
                     if (this.raw > 32767) {
                         this.raw -= 65535;
                     }
+                    volParBit = 2.048 / 32767;
+                    voltage = volParBit * this.raw;
+                    console.log("power voltage : " + voltage + "\n");
                 }
             });
             /*
@@ -68,9 +71,6 @@
             */
             console.log("raw!!! : " + this.raw + "\n");
 
-            volParBit = 2.048 / 32767;
-            voltage = volParBit * this.raw;
-            console.log("power voltage : "+voltage+"\n");
             return voltage;
 
         }
