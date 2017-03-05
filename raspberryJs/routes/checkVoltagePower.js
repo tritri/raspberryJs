@@ -40,9 +40,9 @@ var checkVoltagePower = (function () {
                 if (raw > 32767) {
                     raw -= 65535;
                 }
+                console.log("raw!!! : " + raw + "\n");
             }
         });
-        console.log("raw!!! : " + raw + "\n");
         volParBit = 2.048 / 32767;
         voltage = volParBit * raw;
         console.log("power voltage : " + voltage + "\n");
