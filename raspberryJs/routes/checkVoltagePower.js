@@ -34,6 +34,7 @@ var checkVoltagePower = (function () {
                 console.log("i2c read error!\n");
             }
             else {
+                console.log("res!!! : " + res + "\n");
                 raw = res[0] << 8;
                 raw = raw | res[1];
                 if (raw > 32767) {
