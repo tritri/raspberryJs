@@ -35,11 +35,11 @@
 
             var bufPresData: Array<number>;
             var raw: number=0;
-            var voltage: number;
+            var voltage: number=0;
             var volParBit: number;
             sleep.usleep(deltaWait);
 
-            wire.read(2, (err, res)=> {
+            wire.read(2, (err, res,voltage)=> {
                 if (err) {
                     console.log("i2c read error!\n");
                 } else {
@@ -49,6 +49,7 @@
                     if (raw > 32767) {
                         raw -= 65535;
                     }
+                    
                     volParBit = 2.048 / 32767;
                     voltage = volParBit * raw;
                     console.log("power voltage : " + voltage + "\n");
