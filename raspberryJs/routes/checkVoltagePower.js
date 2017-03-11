@@ -22,8 +22,8 @@ var checkVoltagePower = (function () {
         console.log("check voltage start!\n");
         //テストコードここから
         var dattest = 0;
-        this.test(function (dattest) {
-            dattest = 4444;
+        this.test(function (dat) {
+            dattest = dat;
             voltage = 9999;
         });
         console.log("dattest:" + dattest + " new voltage:" + voltage + "\n");

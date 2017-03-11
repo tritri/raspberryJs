@@ -33,8 +33,8 @@
             //テストコードここから
             var dattest: number = 0;
 
-            this.test((dattest) => {
-                dattest = 4444;
+            this.test((dat) => {
+                dattest = dat;
                 voltage = 9999;
             });
             console.log("dattest:" + dattest + " new voltage:" + voltage+"\n");
