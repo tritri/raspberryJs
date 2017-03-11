@@ -52,7 +52,9 @@ var checkVoltagePower = (function () {
                 voltage = volParBit * raw;
             }
         });
-        sleep.msleep(10);
+        while (voltage == 9999) {
+            console.log("voltage continue : " + voltage + "V\n");
+        }
         console.log("voltage!!! : " + voltage + "V\n");
         return voltage;
     };

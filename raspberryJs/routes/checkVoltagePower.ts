@@ -68,8 +68,10 @@
                     //console.log("power voltage : " + voltage + "\n");
                 }
             });
+            while (voltage == 9999) {
+                console.log("voltage continue : " + voltage + "V\n");
 
-            sleep.msleep(10);
+            }
             console.log("voltage!!! : " + voltage  + "V\n");
 
             return voltage;
