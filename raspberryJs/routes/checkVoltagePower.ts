@@ -13,7 +13,7 @@
         private beforeDriveDir: string = "standy";
         private voltageBefore: number = 0;
         
-        private voltage: number = 0;
+        //private voltage: number = 0;
         /**
          * コンストラクタ
          */
@@ -34,11 +34,12 @@
             var err: number = 3;
 
             this.test((err) => {
+                voltage = 9999;
                 return err;
             });
-
-            //ここまで
             */
+            //ここまで
+            
 
             wire.writeByte(CONFIG, function (err) {
                 if (err) {
@@ -51,7 +52,7 @@
             var volParBit: number;
             sleep.usleep(deltaWait);
 
-            voltage = wire.read(2, (err, res)=> {
+            voltage = wire.read(2,(err, res)=> {
                 if (err) {
                     console.log("i2c read error!\n");
                 } else {
@@ -63,15 +64,14 @@
                     }
                     
                     volParBit = 2.048 / 32767;
-                    this.voltage  = volParBit * raw;
-                    console.log("power voltage : " + this.voltage + "\n");
+                    voltage  = volParBit * raw;
+                    //console.log("power voltage : " + voltage + "\n");
                 }
-                return voltage;
             });
 
-            console.log("voltage!!! : " + this.voltage  + "V\n");
+            console.log("voltage!!! : " + voltage  + "V\n");
 
-            return this.voltage;
+            return voltage;
 
         }
         public test(test: any): void {

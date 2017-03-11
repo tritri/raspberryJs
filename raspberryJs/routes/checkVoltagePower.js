@@ -7,18 +7,17 @@ var sleep = require('sleep'); //i2cなしのデバッグの場合はここをコ
 var addr = MCP3425;
 var wire;
 var checkVoltagePower = (function () {
+    //private voltage: number = 0;
     /**
      * コンストラクタ
      */
     function checkVoltagePower() {
         this.beforeDriveDir = "standy";
         this.voltageBefore = 0;
-        this.voltage = 0;
         //i2cなしのデバッグの場合はここをコメントアウト
         wire = new i2c(MCP3425, { device: '/dev/i2c-1', debug: false });
     }
     checkVoltagePower.prototype.checkVoltage = function () {
-        var _this = this;
         var voltage;
         console.log("check voltage start!\n");
         /*
@@ -26,11 +25,11 @@ var checkVoltagePower = (function () {
         var err: number = 3;
 
         this.test((err) => {
+            voltage = 9999;
             return err;
         });
-
-        //ここまで
         */
+        //ここまで
         wire.writeByte(CONFIG, function (err) {
             if (err) {
                 console.log("i2c initialize error!\n");
@@ -52,13 +51,11 @@ var checkVoltagePower = (function () {
                     raw -= 65535;
                 }
                 volParBit = 2.048 / 32767;
-                _this.voltage = volParBit * raw;
-                console.log("power voltage : " + _this.voltage + "\n");
+                voltage = volParBit * raw;
             }
-            return voltage;
         });
-        console.log("voltage!!! : " + this.voltage + "V\n");
-        return this.voltage;
+        console.log("voltage!!! : " + voltage + "V\n");
+        return voltage;
     };
     checkVoltagePower.prototype.test = function (test) {
         test(4);
