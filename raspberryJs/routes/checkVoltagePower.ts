@@ -69,7 +69,7 @@
                 }
             });
 
-            sleep.msleep(1000);
+            sleep.msleep(10);
             console.log("voltage!!! : " + voltage  + "V\n");
 
             return voltage;
