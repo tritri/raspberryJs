@@ -69,6 +69,7 @@
                 }
             });
 
+            sleep.usleep(deltaWait);
             console.log("voltage!!! : " + voltage  + "V\n");
 
             return voltage;

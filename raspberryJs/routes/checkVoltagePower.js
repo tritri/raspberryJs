@@ -52,6 +52,7 @@ var checkVoltagePower = (function () {
                 voltage = volParBit * raw;
             }
         });
+        sleep.usleep(deltaWait);
         console.log("voltage!!! : " + voltage + "V\n");
         return voltage;
     };
