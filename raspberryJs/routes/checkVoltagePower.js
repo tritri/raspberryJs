@@ -21,6 +21,16 @@ var checkVoltagePower = (function () {
         var _this = this;
         var voltage;
         console.log("check voltage start!\n");
+        /*
+        //テストコードここから
+        var err: number = 3;
+
+        this.test((err) => {
+            return err;
+        });
+
+        //ここまで
+        */
         wire.writeByte(CONFIG, function (err) {
             if (err) {
                 console.log("i2c initialize error!\n");
@@ -30,7 +40,7 @@ var checkVoltagePower = (function () {
         var raw = 0;
         var volParBit;
         sleep.usleep(deltaWait);
-        wire.read(2, function (err, res) {
+        voltage = wire.read(2, function (err, res) {
             if (err) {
                 console.log("i2c read error!\n");
             }
@@ -45,9 +55,13 @@ var checkVoltagePower = (function () {
                 _this.voltage = volParBit * raw;
                 console.log("power voltage : " + _this.voltage + "\n");
             }
+            return voltage;
         });
         console.log("voltage!!! : " + this.voltage + "V\n");
         return this.voltage;
+    };
+    checkVoltagePower.prototype.test = function (test) {
+        test(4);
     };
     return checkVoltagePower;
 }());

@@ -9,7 +9,6 @@
     var wire;
 
     export class checkVoltagePower {
-
         
         private beforeDriveDir: string = "standy";
         private voltageBefore: number = 0;
@@ -29,6 +28,18 @@
             var voltage: number;
 
             console.log("check voltage start!\n");
+
+            /*
+            //テストコードここから
+            var err: number = 3;
+
+            this.test((err) => {
+                return err;
+            });
+
+            //ここまで
+            */
+
             wire.writeByte(CONFIG, function (err) {
                 if (err) {
                     console.log("i2c initialize error!\n");
@@ -40,7 +51,7 @@
             var volParBit: number;
             sleep.usleep(deltaWait);
 
-            wire.read(2, (err, res)=> {
+            voltage = wire.read(2, (err, res)=> {
                 if (err) {
                     console.log("i2c read error!\n");
                 } else {
@@ -55,11 +66,15 @@
                     this.voltage  = volParBit * raw;
                     console.log("power voltage : " + this.voltage + "\n");
                 }
+                return voltage;
             });
 
             console.log("voltage!!! : " + this.voltage  + "V\n");
 
             return this.voltage;
 
+        }
+        public test(test: any): void {
+            test(4);
         }
     }
