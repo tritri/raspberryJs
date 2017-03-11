@@ -20,15 +20,13 @@ var checkVoltagePower = (function () {
     checkVoltagePower.prototype.checkVoltage = function () {
         var voltage;
         console.log("check voltage start!\n");
-        /*
         //テストコードここから
-        var err: number = 3;
-
-        this.test((err) => {
+        var dattest = 0;
+        this.test(function (dattest) {
+            dattest = 4444;
             voltage = 9999;
-            return err;
         });
-        */
+        console.log("dattest:" + dattest + " new voltage:" + voltage + "\n");
         //ここまで
         wire.writeByte(CONFIG, function (err) {
             if (err) {

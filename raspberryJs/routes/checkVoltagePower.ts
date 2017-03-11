@@ -29,15 +29,15 @@
 
             console.log("check voltage start!\n");
 
-            /*
+            
             //テストコードここから
-            var err: number = 3;
+            var dattest: number = 0;
 
-            this.test((err) => {
+            this.test((dattest) => {
+                dattest = 4444;
                 voltage = 9999;
-                return err;
             });
-            */
+            console.log("dattest:" + dattest + " new voltage:" + voltage+"\n");
             //ここまで
             
 
