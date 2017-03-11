@@ -52,7 +52,7 @@
             var volParBit: number;
             sleep.usleep(deltaWait);
 
-            voltage = wire.read(2,(err, res)=> {
+            wire.read(2,(err, res)=> {
                 if (err) {
                     console.log("i2c read error!\n");
                 } else {

@@ -37,7 +37,7 @@ var checkVoltagePower = (function () {
         var raw = 0;
         var volParBit;
         sleep.usleep(deltaWait);
-        voltage = wire.read(2, function (err, res) {
+        wire.read(2, function (err, res) {
             if (err) {
                 console.log("i2c read error!\n");
             }
