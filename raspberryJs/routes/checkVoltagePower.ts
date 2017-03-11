@@ -25,7 +25,7 @@
         
         public checkVoltage(): number {
 
-            var voltage: number;
+            var voltage:  number;
 
             console.log("check voltage start!\n");
 
@@ -69,7 +69,7 @@
                 }
             });
 
-            sleep.usleep(deltaWait);
+            sleep.msleep(1000);
             console.log("voltage!!! : " + voltage  + "V\n");
 
             return voltage;
