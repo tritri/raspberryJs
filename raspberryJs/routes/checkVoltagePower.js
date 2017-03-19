@@ -6,6 +6,7 @@ var i2c = require('i2c'); //i2cなしのデバッグの場合はここをコメ�
 var sleep = require('sleep'); //i2cなしのデバッグの場合はここをコメントアウト
 var addr = MCP3425;
 var wire;
+var es6_promise_1 = require('es6-promise');
 var checkVoltagePower = (function () {
     //private voltage: number = 0;
     /**
@@ -37,7 +38,7 @@ var checkVoltagePower = (function () {
         var raw = 0;
         var volParBit;
         sleep.usleep(deltaWait);
-        wire.read(2, function (err, res) {
+        var process = new es6_promise_1.Promise(wire.read(2, function (err, res) {
             if (err) {
                 console.log("i2c read error!\n");
             }
@@ -51,11 +52,10 @@ var checkVoltagePower = (function () {
                 volParBit = 2.048 / 32767;
                 voltage = volParBit * raw;
             }
+        }));
+        process.then(function () {
+            console.log("voltage!!! : " + voltage + "V\n");
         });
-        while (voltage == 9999) {
-            console.log("voltage continue : " + voltage + "V\n");
-        }
-        console.log("voltage!!! : " + voltage + "V\n");
         return voltage;
     };
     checkVoltagePower.prototype.test = function (test) {

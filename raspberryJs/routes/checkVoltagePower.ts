@@ -7,6 +7,7 @@
 
     var addr = MCP3425;
     var wire;
+    import {Promise} from 'es6-promise'
 
     export class checkVoltagePower {
         
@@ -25,11 +26,11 @@
         
         public checkVoltage(): number {
 
-            var voltage:  number;
+            var voltage: number;
 
             console.log("check voltage start!\n");
 
-            
+
             //テストコードここから
             var dattest: number = 0;
 
@@ -37,9 +38,9 @@
                 dattest = dat;
                 voltage = 9999;
             });
-            console.log("dattest:" + dattest + " new voltage:" + voltage+"\n");
+            console.log("dattest:" + dattest + " new voltage:" + voltage + "\n");
             //ここまで
-            
+
 
             wire.writeByte(CONFIG, function (err) {
                 if (err) {
@@ -48,32 +49,31 @@
             });
 
             var bufPresData: Array<number>;
-            var raw: number=0;
+            var raw: number = 0;
             var volParBit: number;
             sleep.usleep(deltaWait);
+            var process = new Promise(
+                wire.read(2, (err, res) => {
+                    if (err) {
+                        console.log("i2c read error!\n");
+                    } else {
+                        console.log("res!!! : " + res + "\n");
+                        raw = res[0] << 8;
+                        raw = raw | res[1];
+                        if (raw > 32767) {
+                            raw -= 65535;
+                        }
 
-            wire.read(2,(err, res)=> {
-                if (err) {
-                    console.log("i2c read error!\n");
-                } else {
-                    console.log("res!!! : " + res + "\n");
-                    raw = res[0] << 8;
-                    raw = raw | res[1];
-                    if (raw > 32767) {
-                        raw -= 65535;
+                        volParBit = 2.048 / 32767;
+                        voltage = volParBit * raw;
+                        //console.log("power voltage : " + voltage + "\n");
                     }
-                    
-                    volParBit = 2.048 / 32767;
-                    voltage  = volParBit * raw;
-                    //console.log("power voltage : " + voltage + "\n");
+                })
+            )
+            process.then(() => {
+                console.log("voltage!!! : " + voltage + "V\n");
                 }
-            });
-            while (voltage == 9999) {
-                console.log("voltage continue : " + voltage + "V\n");
-
-            }
-            console.log("voltage!!! : " + voltage  + "V\n");
-
+            );
             return voltage;
 
         }
