@@ -21,7 +21,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <EnableTypeScript>true</EnableTypeScript>
@@ -37,14 +37,6 @@
     <Content Include=".bowerrc" />
     <Content Include=".tsdrc" />
     <Content Include="bower.json" />
-    <Content Include="node_modules\es6-promise\CHANGELOG.md" />
-    <Content Include="node_modules\es6-promise\dist\es6-promise.auto.map" />
-    <Content Include="node_modules\es6-promise\dist\es6-promise.auto.min.map" />
-    <Content Include="node_modules\es6-promise\dist\es6-promise.map" />
-    <Content Include="node_modules\es6-promise\dist\es6-promise.min.map" />
-    <Content Include="node_modules\es6-promise\LICENSE" />
-    <Content Include="node_modules\es6-promise\package.json" />
-    <Content Include="node_modules\es6-promise\README.md" />
     <Content Include="node_modules\i2c\.npmignore" />
     <Content Include="node_modules\i2c\binding.gyp" />
     <Content Include="node_modules\i2c\build\binding.Makefile" />
@@ -95,7 +87,6 @@
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.css" />
     <Content Include="README.md" />
-    <TypeScriptCompile Include="node_modules\es6-promise\es6-promise.d.ts" />
     <TypeScriptCompile Include="routes\layout.ts" />
     <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="routes\checkVoltagePower.ts" />
@@ -112,11 +103,6 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="node_modules\" />
-    <Folder Include="node_modules\es6-promise\" />
-    <Folder Include="node_modules\es6-promise\dist\" />
-    <Folder Include="node_modules\es6-promise\lib\" />
-    <Folder Include="node_modules\es6-promise\lib\es6-promise\" />
-    <Folder Include="node_modules\es6-promise\lib\es6-promise\promise\" />
     <Folder Include="node_modules\i2c\" />
     <Folder Include="node_modules\i2c\build\" />
     <Folder Include="node_modules\i2c\build\Release\" />
@@ -161,24 +147,6 @@
     <Folder Include="views\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="node_modules\es6-promise\auto.js" />
-    <Compile Include="node_modules\es6-promise\dist\es6-promise.auto.js" />
-    <Compile Include="node_modules\es6-promise\dist\es6-promise.auto.min.js" />
-    <Compile Include="node_modules\es6-promise\dist\es6-promise.js" />
-    <Compile Include="node_modules\es6-promise\dist\es6-promise.min.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise.auto.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise\-internal.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise\asap.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise\enumerator.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise\polyfill.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise\promise.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise\promise\all.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise\promise\race.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise\promise\reject.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise\promise\resolve.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise\then.js" />
-    <Compile Include="node_modules\es6-promise\lib\es6-promise\utils.js" />
     <Compile Include="node_modules\i2c\main.js" />
     <Compile Include="node_modules\i2c\node_modules\bindings\bindings.js" />
     <Compile Include="node_modules\i2c\node_modules\coffee-script\lib\coffee-script\browser.js" />
