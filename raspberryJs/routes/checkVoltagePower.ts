@@ -56,6 +56,7 @@
                 wire.read(2, (err, res) => {
                     if (err) {
                         console.log("i2c read error!\n");
+                        return false;
                     } else {
                         console.log("res!!! : " + res + "\n");
                         raw = res[0] << 8;
@@ -67,6 +68,7 @@
                         volParBit = 2.048 / 32767;
                         voltage = volParBit * raw;
                         console.log("power voltage_1 : " + voltage + "\n");
+                        return true;
                     }
                 })
             )
