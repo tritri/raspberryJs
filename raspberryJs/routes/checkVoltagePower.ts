@@ -30,7 +30,7 @@
 
             console.log("check voltage start!\n");
 
-
+            /*
             //テストコードここから
             var dattest: number = 0;
 
@@ -40,7 +40,7 @@
             });
             console.log("dattest:" + dattest + " new voltage:" + voltage + "\n");
             //ここまで
-
+            */
 
             wire.writeByte(CONFIG, function (err) {
                 if (err) {
@@ -66,16 +66,16 @@
 
                         volParBit = 2.048 / 32767;
                         voltage = volParBit * raw;
-                        console.log("power voltage : " + voltage + "\n");
+                        console.log("power voltage_1 : " + voltage + "\n");
                     }
                 })
             )
             var process2 = new Promise(() => {
-                console.log("voltage!!! : " + voltage + "V\n");
+                console.log("voltage_2!!! : " + voltage + "V\n");
                 }
             );
             Promise.all([process1, process2]);
-
+            console.log("voltage_3 : " + voltage + "V\n");
             return voltage;
 
         }

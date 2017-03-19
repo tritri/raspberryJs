@@ -21,14 +21,17 @@ var checkVoltagePower = (function () {
     checkVoltagePower.prototype.checkVoltage = function () {
         var voltage;
         console.log("check voltage start!\n");
+        /*
         //テストコードここから
-        var dattest = 0;
-        this.test(function (dat) {
+        var dattest: number = 0;
+
+        this.test((dat) => {
             dattest = dat;
             voltage = 9999;
         });
         console.log("dattest:" + dattest + " new voltage:" + voltage + "\n");
         //ここまで
+        */
         wire.writeByte(CONFIG, function (err) {
             if (err) {
                 console.log("i2c initialize error!\n");
@@ -51,13 +54,14 @@ var checkVoltagePower = (function () {
                 }
                 volParBit = 2.048 / 32767;
                 voltage = volParBit * raw;
-                console.log("power voltage : " + voltage + "\n");
+                console.log("power voltage_1 : " + voltage + "\n");
             }
         }));
         var process2 = new es6_promise_1.Promise(function () {
-            console.log("voltage!!! : " + voltage + "V\n");
+            console.log("voltage_2!!! : " + voltage + "V\n");
         });
         es6_promise_1.Promise.all([process1, process2]);
+        console.log("voltage_3 : " + voltage + "V\n");
         return voltage;
     };
     checkVoltagePower.prototype.test = function (test) {
