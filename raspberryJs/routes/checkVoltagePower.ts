@@ -52,7 +52,7 @@
             var raw: number = 0;
             var volParBit: number;
             sleep.usleep(deltaWait);
-            var process = new Promise(
+            var process1 = new Promise(
                 wire.read(2, (err, res) => {
                     if (err) {
                         console.log("i2c read error!\n");
@@ -70,10 +70,12 @@
                     }
                 })
             )
-            process.then(() => {
+            var process2 = new Promise(() => {
                 console.log("voltage!!! : " + voltage + "V\n");
                 }
             );
+            Promise.all([process1, process2]);
+
             return voltage;
 
         }

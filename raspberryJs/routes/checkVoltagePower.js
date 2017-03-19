@@ -38,7 +38,7 @@ var checkVoltagePower = (function () {
         var raw = 0;
         var volParBit;
         sleep.usleep(deltaWait);
-        var process = new es6_promise_1.Promise(wire.read(2, function (err, res) {
+        var process1 = new es6_promise_1.Promise(wire.read(2, function (err, res) {
             if (err) {
                 console.log("i2c read error!\n");
             }
@@ -53,9 +53,10 @@ var checkVoltagePower = (function () {
                 voltage = volParBit * raw;
             }
         }));
-        process.then(function () {
+        var process2 = new es6_promise_1.Promise(function () {
             console.log("voltage!!! : " + voltage + "V\n");
         });
+        es6_promise_1.Promise.all([process1, process2]);
         return voltage;
     };
     checkVoltagePower.prototype.test = function (test) {
