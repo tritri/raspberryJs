@@ -32,6 +32,7 @@ var checkVoltagePower = (function () {
         console.log("dattest:" + dattest + " new voltage:" + voltage + "\n");
         //ここまで
         */
+        //i2c初期化
         wire.writeByte(CONFIG, function (err) {
             if (err) {
                 console.log("i2c initialize error!\n");
@@ -62,7 +63,7 @@ var checkVoltagePower = (function () {
         var process2 = new es6_promise_1.Promise(function () {
             console.log("voltage_2!!! : " + voltage + "V\n");
         });
-        es6_promise_1.Promise.all([process1, process2]);
+        es6_promise_1.Promise.all([process2, process1]);
         console.log("voltage_3 : " + voltage + "V\n");
         return voltage;
     };

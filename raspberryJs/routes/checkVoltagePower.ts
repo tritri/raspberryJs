@@ -42,6 +42,7 @@
             //ここまで
             */
 
+            //i2c初期化
             wire.writeByte(CONFIG, function (err) {
                 if (err) {
                     console.log("i2c initialize error!\n");
@@ -76,7 +77,7 @@
                 console.log("voltage_2!!! : " + voltage + "V\n");
                 }
             );
-            Promise.all([process1, process2]);
+            Promise.all([process2, process1]);
             console.log("voltage_3 : " + voltage + "V\n");
             return voltage;
 
