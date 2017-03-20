@@ -53,6 +53,7 @@
             var raw: number = 0;
             var volParBit: number;
             sleep.usleep(deltaWait);
+            /*
             var process1 = new Promise(
                 wire.read(2, (err, res) => {
                     if (err) {
@@ -73,11 +74,39 @@
                     }
                 })
             )
+            
             var process2 = new Promise(() => {
                 console.log("voltage_2!!! : " + voltage + "V\n");
                 }
             );
+            
             Promise.all([process2, process1]);
+            */
+            var process2 = new Promise(() => {
+                console.log("voltage_2!!! : " + voltage + "V\n");
+            }
+            );
+            process2.then(
+                wire.read(2, (err, res) => {
+                    if (err) {
+                        console.log("i2c read error!\n");
+                        return err;
+                    } else {
+                        console.log("res!!! : " + res + "\n");
+                        raw = res[0] << 8;
+                        raw = raw | res[1];
+                        if (raw > 32767) {
+                            raw -= 65535;
+                        }
+
+                        volParBit = 2.048 / 32767;
+                        voltage = volParBit * raw;
+                        console.log("power voltage_1 : " + voltage + "\n");
+                        return null;
+                    }
+                })
+            );
+                
             console.log("voltage_3 : " + voltage + "V\n");
             return voltage;
 
