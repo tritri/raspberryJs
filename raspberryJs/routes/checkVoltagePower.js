@@ -6,7 +6,6 @@ var i2c = require('i2c'); //i2cなしのデバッグの場合はここをコメ�
 var sleep = require('sleep'); //i2cなしのデバッグの場合はここをコメントアウト
 var addr = MCP3425;
 var wire;
-var es6_promise_1 = require('es6-promise');
 var checkVoltagePower = (function () {
     //private voltage: number = 0;
     /**
@@ -42,6 +41,26 @@ var checkVoltagePower = (function () {
         var raw = 0;
         var volParBit;
         sleep.usleep(deltaWait);
+        var readValue = function (callback) {
+            wire.read(2, function (err, res) {
+                var tmpVoltage = 0;
+                if (err) {
+                    console.log("i2c read error!\n");
+                }
+                else {
+                    console.log("res!!! : " + res + "\n");
+                    raw = res[0] << 8;
+                    raw = raw | res[1];
+                    if (raw > 32767) {
+                        raw -= 65535;
+                    }
+                    volParBit = 2.048 / 32767;
+                    tmpVoltage = volParBit * raw;
+                    console.log("power voltage_1 : " + tmpVoltage + "\n");
+                }
+                callback(tmpVoltage);
+            });
+        };
         /*
         var process1 = new Promise(
             wire.read(2, (err, res) => {
@@ -71,27 +90,6 @@ var checkVoltagePower = (function () {
         
         Promise.all([process2, process1]);
         */
-        var process2 = new es6_promise_1.Promise(function () {
-            console.log("voltage_2!!! : " + voltage + "V\n");
-        });
-        process2.then(wire.read(2, function (err, res) {
-            if (err) {
-                console.log("i2c read error!\n");
-                return err;
-            }
-            else {
-                console.log("res!!! : " + res + "\n");
-                raw = res[0] << 8;
-                raw = raw | res[1];
-                if (raw > 32767) {
-                    raw -= 65535;
-                }
-                volParBit = 2.048 / 32767;
-                voltage = volParBit * raw;
-                console.log("power voltage_1 : " + voltage + "\n");
-                return null;
-            }
-        }));
         console.log("voltage_3 : " + voltage + "V\n");
         return voltage;
     };
