@@ -86,7 +86,7 @@
             return true;
         }
 
-        public getStatus(motorNum: number): string {
+        public getStatus(motorNum: number, req, resWeb, next): string {
 
             var controlData = FAULT_REG;
             var motorMessage: string ;
@@ -94,7 +94,7 @@
             if (motorNum == 0) {
                 motorMessage = "motor0 status is error : ";
                 wire0.readBytes(controlData, 1, function (err, res){
-		    console.log('Motor0 StatusNum : '+String(res[0])+' Status0 : '+String(res[0] & 0x04));
+		            console.log('Motor0 StatusNum : '+String(res[0])+' Status0 : '+String(res[0] & 0x04));
 
                     if ((res[0] & 0x01) != 0) {//一番下位のビット判定
                         if ((res[0] & 0x02) != 0) {
@@ -109,10 +109,16 @@
                         if ((res[0] & 0x10) != 0) {
                             motorMessage += ",ILIMIT!";
                         }
-			motorMessage += '('+String(res[0])+')';
+			            motorMessage += '('+String(res[0])+')';
                     } else {
                         motorMessage = "motor0 Normal!";
                     }
+
+                    resWeb.json(
+                        {
+                            msgMotor0: motorMessage
+                        }
+                    );
                 });
             } else {
                 motorMessage = "motor1 status is error : ";                
@@ -130,10 +136,15 @@
                         if ((res[0] & 0x10) != 0) {
                             motorMessage += ",ILIMIT!";
                         }
-			motorMessage += '('+String(res[0])+')';
+			        motorMessage += '('+String(res[0])+')';
                     } else {
                         motorMessage = "motor1 Normal!";
                     }
+                    resWeb.json(
+                        {
+                            msgMotor1: motorMessage
+                        }
+                    );
                 });
             }
             console.log(motorMessage);

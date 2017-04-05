@@ -90,8 +90,8 @@ router.post('/driveCrawler', function (req, res, next) {
             motor1.drive(volt, 1, "standy");
             break;
         case "DriveCheck":
-            str0 = motor0.getStatus(0);
-            str1 = motor1.getStatus(1);
+            str0 = motor0.getStatus(0, req, res, next);
+            str1 = motor1.getStatus(1, req, res, next);
             break;
         default:
             motor0.drive(volt, 0, "standy");
@@ -102,8 +102,6 @@ router.post('/driveCrawler', function (req, res, next) {
     
     res.json(
         {
-            msgMotor0: str0,
-            msgMotor1: str1,
             msgVoltage: String(volt)
         }
     );
@@ -158,13 +156,6 @@ router.post('/checkVoltage', function (req, res, next) {
     var addata = new adconverter.checkVoltagePower;
     var volt = 5.0;
     addata.checkVoltage(req, res, next);
-    /*
-    res.json(
-        {
-            msgPowerVolt: '電圧: ' + addata.checkVoltage(req, res, next) + 'V'
-        }
-    );
-    */
 });
 
 module.exports = router;

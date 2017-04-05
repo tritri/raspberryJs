@@ -54,18 +54,7 @@
             var voltage: number;
 
             console.log("check voltage start!\n");
-
-            /*
-            //テストコードここから
-            var dattest: number = 0;
-
-            this.test((dat) => {
-                dattest = dat;
-                voltage = 9999;
-            });
-            console.log("dattest:" + dattest + " new voltage:" + voltage + "\n");
-            //ここまで
-            */
+            
             
             //i2c初期化
             wire.writeByte(CONFIG, function (err) {
@@ -87,7 +76,6 @@
                         console.log("i2c read error!\n");
                         return err;
                     } else {
-                        console.log("res!!! : " + res + "\n");
                         raw = res[0] << 8;
                         raw = raw | res[1];
                         if (raw > 32767) {
@@ -102,7 +90,7 @@
                                 msgPowerVolt: '電圧: ' + voltage + 'V'
                             }
                         );
-                        console.log("power voltage_1 : " + voltage + "\n");
+                        console.log("power voltage : " + voltage + "\n");
                         return null;
                     }
                 })
@@ -115,12 +103,5 @@
             
             Promise.all([process2, process1]);
             
-
-            console.log("voltage_3 : " + voltage + "V\n");
-
-        }
-
-        public test(test: any): void {
-            test(4);
         }
     }

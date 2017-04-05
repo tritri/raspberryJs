@@ -75,7 +75,7 @@ var motorDrive = (function () {
         }
         return true;
     };
-    motorDrive.prototype.getStatus = function (motorNum) {
+    motorDrive.prototype.getStatus = function (motorNum, req, resWeb, next) {
         var controlData = FAULT_REG;
         var motorMessage;
         if (motorNum == 0) {
@@ -100,6 +100,9 @@ var motorDrive = (function () {
                 else {
                     motorMessage = "motor0 Normal!";
                 }
+                resWeb.json({
+                    msgMotor0: motorMessage
+                });
             });
         }
         else {
@@ -123,6 +126,9 @@ var motorDrive = (function () {
                 else {
                     motorMessage = "motor1 Normal!";
                 }
+                resWeb.json({
+                    msgMotor1: motorMessage
+                });
             });
         }
         console.log(motorMessage);
