@@ -40,7 +40,7 @@ var checkVoltagePower = (function () {
         //i2cなしのデバッグの場合はここをコメントアウト
         wire = new i2c(MCP3425, { device: '/dev/i2c-1', debug: false });
     }
-    checkVoltagePower.prototype.checkVoltage = function (req, res, next) {
+    checkVoltagePower.prototype.checkVoltage = function (req, resWeb, next) {
         var voltage;
         console.log("check voltage start!\n");
         /*
@@ -78,8 +78,8 @@ var checkVoltagePower = (function () {
                 }
                 volParBit = 2.048 / 32767;
                 voltage = volParBit * raw;
-                res.json({
-                    msgPowerVolt: '電圧: ' + voltage + '99999V'
+                resWeb.json({
+                    msgPowerVolt: '電圧: ' + voltage + 'V'
                 });
                 console.log("power voltage_1 : " + voltage + "\n");
                 return null;

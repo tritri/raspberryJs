@@ -1,4 +1,5 @@
-﻿    const MCP3425 = 0x68;//MCP3425 i2cアドレス
+﻿import express = require('express');
+    const MCP3425 = 0x68;//MCP3425 i2cアドレス
     const CONFIG = 0x88;
     const deltaWait = 70000;//70ms
 
@@ -48,7 +49,7 @@
             });
         };
         
-        public checkVoltage(req, res, next): void {
+        public checkVoltage(req, resWeb, next): void {
 
             var voltage: number;
 
@@ -96,9 +97,9 @@
                         volParBit = 2.048 / 32767;
                         voltage = volParBit * raw;
 
-                        res.json(
+                        resWeb.json(
                             {
-                                msgPowerVolt: '電圧: ' + voltage + '99999V'
+                                msgPowerVolt: '電圧: ' + voltage + 'V'
                             }
                         );
                         console.log("power voltage_1 : " + voltage + "\n");
