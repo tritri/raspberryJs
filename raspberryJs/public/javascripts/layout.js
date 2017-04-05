@@ -73,8 +73,7 @@ function doActionGetVoltageButton(e, id) {
         var target1 = document.getElementById("motor1Status");//ここの文字列はlayout.jade中の文字を返したい要素のidを指定する
         var target2 = document.getElementById("motor2Status");//ここの文字列はlayout.jade中の文字を返したい要素のidを指定する
         var res = JSON.parse(ajax.getResponse());
-        target1.textContent = res.msgMotorDrive;//ここから指定したlayout.jadeの要素にテキストとして書き込む
-        target2.textContent = res.msgMotorVolt;//ここから指定したlayout.jadeの要素にテキストとして書き込む
+        target1.textContent = res.msgPowerVolt;//ここから指定したlayout.jadeの要素にテキストとして書き込む
     }
     ajax = new AjaxObject('/checkVoltage?buttonName=' + 
                     radioVal1 + '&voltagePercent=' + input.value, callback);//ここからindex.tsへpostされる(layoutが名前となりコントローラーにバインドされる関数がどこから来たのか区別するために使われます、?以降がクエリ文字列としてコントローラーに引き渡されます)

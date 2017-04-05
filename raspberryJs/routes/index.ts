@@ -156,12 +156,15 @@ router.post('/checkVoltage', function (req, res, next) {
 
     console.log("checkVoltage!!!!!\n");
     var addata = new adconverter.checkVoltagePower;
-    var volt=5.0;
+    var volt = 5.0;
+    addata.checkVoltage(req, res, next);
+    /*
     res.json(
         {
-            msgPowerVolt: '電圧: ' + addata.checkVoltage() + 'V'
+            msgPowerVolt: '電圧: ' + addata.checkVoltage(req, res, next) + 'V'
         }
     );
+    */
 });
 
 module.exports = router;

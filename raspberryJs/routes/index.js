@@ -141,9 +141,14 @@ router.post('/checkVoltage', function (req, res, next) {
     console.log("checkVoltage!!!!!\n");
     var addata = new adconverter.checkVoltagePower;
     var volt = 5.0;
-    res.json({
-        msgPowerVolt: '電圧: ' + addata.checkVoltage() + 'V'
-    });
+    addata.checkVoltage(req, res, next);
+    /*
+    res.json(
+        {
+            msgPowerVolt: '電圧: ' + addata.checkVoltage(req, res, next) + 'V'
+        }
+    );
+    */
 });
 module.exports = router;
 //# sourceMappingURL=index.js.map
