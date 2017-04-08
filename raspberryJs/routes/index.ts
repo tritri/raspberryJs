@@ -99,12 +99,12 @@ router.post('/driveCrawler', function (req, res, next) {
     }
         beforeVoltage = volt;
     //}
-    
+    /*
     res.json(
         {
             msgVoltage: String(volt)
         }
-    );
+    );*/
 });
 
 router.post('/driveMotor', function (req, res, next) {
