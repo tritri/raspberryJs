@@ -86,7 +86,7 @@
             return true;
         }
 
-        public getStatus(motorNum: number, req, resWeb, next): string {
+        public getStatus(motorNum: number, req, resWeb, next): void {
 
             var controlData = FAULT_REG;
             var motorMessage: string ;
@@ -148,7 +148,5 @@
                 });
             }
             console.log(motorMessage);
-            return motorMessage;
         }
-
     }

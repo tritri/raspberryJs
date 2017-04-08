@@ -132,7 +132,6 @@ var motorDrive = (function () {
             });
         }
         console.log(motorMessage);
-        return motorMessage;
     };
     return motorDrive;
 }());
