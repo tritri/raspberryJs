@@ -86,7 +86,7 @@
             return true;
         }
 
-        public getStatus(motorNum: number, req, resWeb, next): void {
+        public getStatus(motorNum: number, voltage: number, req, resWeb, next): void {
 
             var controlData = FAULT_REG;
             var motorMessage: string ;
@@ -116,7 +116,8 @@
 
                     resWeb.json(
                         {
-                            msgMotor0: motorMessage
+                            msgMotor0: motorMessage,
+                            msgVoltage: String(voltage)
                         }
                     );
                 });
@@ -140,11 +141,13 @@
                     } else {
                         motorMessage = "motor1 Normal!";
                     }
+                    /*
                     resWeb.json(
                         {
                             msgMotor1: motorMessage
                         }
                     );
+                    */
                 });
             }
             console.log(motorMessage);

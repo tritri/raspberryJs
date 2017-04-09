@@ -84,8 +84,8 @@ router.post('/driveCrawler', function (req, res, next) {
             motor1.drive(volt, 1, "standy");
             break;
         case "DriveCheck":
-            motor0.getStatus(0, req, res, next);
-            motor1.getStatus(1, req, res, next);
+            motor0.getStatus(0, volt, req, res, next);
+            motor1.getStatus(1, volt, req, res, next);
             break;
         default:
             motor0.drive(volt, 0, "standy");

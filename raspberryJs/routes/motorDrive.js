@@ -75,7 +75,7 @@ var motorDrive = (function () {
         }
         return true;
     };
-    motorDrive.prototype.getStatus = function (motorNum, req, resWeb, next) {
+    motorDrive.prototype.getStatus = function (motorNum, voltage, req, resWeb, next) {
         var controlData = FAULT_REG;
         var motorMessage;
         if (motorNum == 0) {
@@ -101,7 +101,8 @@ var motorDrive = (function () {
                     motorMessage = "motor0 Normal!";
                 }
                 resWeb.json({
-                    msgMotor0: motorMessage
+                    msgMotor0: motorMessage,
+                    msgVoltage: String(voltage)
                 });
             });
         }
@@ -126,9 +127,13 @@ var motorDrive = (function () {
                 else {
                     motorMessage = "motor1 Normal!";
                 }
-                resWeb.json({
-                    msgMotor1: motorMessage
-                });
+                /*
+                resWeb.json(
+                    {
+                        msgMotor1: motorMessage
+                    }
+                );
+                */
             });
         }
         console.log(motorMessage);
