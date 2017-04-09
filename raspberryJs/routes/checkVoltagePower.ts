@@ -1,5 +1,4 @@
-﻿import express = require('express');
-    const MCP3425 = 0x68;//MCP3425 i2cアドレス
+﻿    const MCP3425 = 0x68;//MCP3425 i2cアドレス
     const CONFIG = 0x88;
     const deltaWait = 70000;//70ms
 

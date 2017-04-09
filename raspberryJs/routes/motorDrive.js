@@ -32,7 +32,6 @@ var motorDrive = (function () {
      * @param queryDatas
      */
     motorDrive.prototype.drive = function (voltage, motorNum, driveDir) {
-        //console.log("drive function reach!\n"+"volt:"+ String(voltage)+"\n");
         var counter = 0;
         while (Math.abs(voltage - this.voltageBefore) >= deltaV
             || driveDir != this.beforeDriveDir) {
@@ -55,11 +54,9 @@ var motorDrive = (function () {
             var byteData = (vSet << 2) | drive;
             var motorNo = motorNum;
             if (motorNo == 0) {
-                //console.log("motor0 Start!\n");
                 wire0.writeBytes(controlData, [byteData], function (err, res) { });
             }
             else {
-                //console.log("motor1 Start!\n");
                 wire1.writeBytes(controlData, [byteData], function (err, res) { });
             }
             if (voltage > this.voltageBefore) {
@@ -69,7 +66,6 @@ var motorDrive = (function () {
                 this.voltageBefore -= deltaV;
             }
             this.beforeDriveDir = driveDir;
-            //console.log("Number Calc : " + counter);
             counter++;
             sleep.usleep(deltaWait); //i2cなしのデバッグの場合はここをコメントアウト
         }
@@ -127,13 +123,9 @@ var motorDrive = (function () {
                 else {
                     motorMessage = "motor1 Normal!";
                 }
-                /*
-                resWeb.json(
-                    {
-                        msgMotor1: motorMessage
-                    }
-                );
-                */
+                resWeb.json({
+                    msgMotor1: motorMessage
+                });
             });
         }
         console.log(motorMessage);

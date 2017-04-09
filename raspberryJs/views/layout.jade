@@ -126,7 +126,10 @@ html(lang='ja')
                             div.col-xs-4
                                 button.btn.btn-primary( type="button",class="buttonsDrive", id="driveDRtn",value="DownRight" ,onclick="doActionButton(arguments[0],'driveDRtn');") 下右
                         div.row
-                            button.btn.btn-primary( type="button",class="buttonsDrive", id="driveCheck",value="DriveCheck" ,onclick="doActionButton(arguments[0],'driveCheck');") ステータス更新
+                            div.col-xs-6
+                                button.btn.btn-primary( type="button",class="buttonsDrive", id="driveCheck",value="DriveCheck" ,onclick="doActionGetMotor0StatusButton(arguments[0],'driveCheck');") ステータス更新:Motor0
+                            div.col-xs-6
+                                button.btn.btn-primary( type="button",class="buttonsDrive", id="driveCheck",value="DriveCheck" ,onclick="doActionGetMotor1StatusButton(arguments[0],'driveCheck');") ステータス更新:Motor1
                             p ここにどのボタンが押されたか表示
                             p(id="buttontxt")
                         div.row

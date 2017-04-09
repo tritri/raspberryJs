@@ -3,6 +3,7 @@ var express = require('express');
 //import i2c = require('i2c');//i2cモジュールの読み込み
 var motorP = require('./motorDrive'); //外部モジュールmotorDriveの読みこみ
 var adconverter = require('./checkVoltagePower');
+var currentVoltage = 0.0;
 var beforeVolume = 2.0;
 var beforeVoltage = 0.0;
 var beforeButton = "standy";
@@ -41,9 +42,8 @@ router.post('/driveCrawler', function (req, res, next) {
     }
     var str0 = "No Status";
     var str1 = "No Status";
-    //motor.drive(1.5, 0, "fdfsd");
-    //motor.drive(volt, 1, "break");
     var volt = (Number(strVolume) * (5.06 - 0.48) / 100 + 0.48);
+    currentVoltage = volt;
     console.log("calc volt!\n" + "volt:" + volt + "\n");
     //if (strControl != undefined) {
     switch (strControl) {
@@ -89,16 +89,8 @@ router.post('/driveCrawler', function (req, res, next) {
             break;
         default:
             motor0.drive(volt, 0, "standy");
-            motor1.drive(volt, 1, "standy");
     }
     beforeVoltage = volt;
-    //}
-    /*
-    res.json(
-        {
-            msgVoltage: String(volt)
-        }
-    );*/
 });
 router.post('/driveMotor', function (req, res, next) {
     var motor = new motorP.motorDrive();
@@ -137,6 +129,14 @@ router.post('/driveMotor', function (req, res, next) {
         msgMotorVolt: '電圧: ' + volt + 'V',
         msgMotorDrive: 'もーたーの状態: ' + strControl
     });
+});
+router.post('/checkMotorStatus0', function (req, res, next) {
+    console.log("checkMotorStatus0!!!!!\n");
+    motor0.getStatus(0, currentVoltage, req, res, next);
+});
+router.post('/checkMotorStatus1', function (req, res, next) {
+    console.log("checkMotorStatus0!!!!!\n");
+    motor1.getStatus(1, currentVoltage, req, res, next);
 });
 router.post('/checkVoltage', function (req, res, next) {
     console.log("checkVoltage!!!!!\n");
