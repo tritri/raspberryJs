@@ -1,8 +1,8 @@
 "use strict";
-var express = require('express');
+var express = require("express");
 //import i2c = require('i2c');//i2cモジュールの読み込み
-var motorP = require('./motorDrive'); //外部モジュールmotorDriveの読みこみ
-var adconverter = require('./checkVoltagePower');
+var motorP = require("./motorDrive"); //外部モジュールmotorDriveの読みこみ
+var adconverter = require("./checkVoltagePower");
 var currentVoltage = 0.0;
 var beforeVolume = 2.0;
 var beforeVoltage = 0.0;
@@ -93,6 +93,9 @@ router.post('/driveCrawler', function (req, res, next) {
             motor0.drive(volt, 0, "standy");
     }
     beforeVoltage = volt;
+    res.json({
+        msgVoltage: String(volt)
+    });
 });
 router.post('/driveMotor', function (req, res, next) {
     var motor = new motorP.motorDrive();
