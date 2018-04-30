@@ -37,6 +37,9 @@ $ nvm --version
 まず、Openssl-develのインストールを実行する
 $ sudo apt-get install libssl-dev
 
+npmよりnodejsのインストール
+
+$ nvm install v0.4.0
 
 
 
